@@ -10,7 +10,7 @@ Feature based approach of creating react-redux applications.
 - Gulp for managing build tasks (including webpack task too)
 - Bluebird
 
-## Proposed structure
+## Proposed app structure
 - /src - application source directory
 	- /components - common components which are expected to be reused by other components.
 	- /constants - application constants. Consists of mirrored values and key-value pairs.
@@ -23,7 +23,7 @@ Feature based approach of creating react-redux applications.
 	- css - css files output directory.
 	- images - any images being imported by components.
 	
-## Component structure example
+## Proposed component structure example
 - /ExampleComponentName - component root directory
 	- /components - child components that only belong to ExampleComponentName.
 	 	- ChildComponent - child component which follows the same structure. Child components could only be used by any parent components, but not by sibling one.
