@@ -1,6 +1,6 @@
 # react-redux-template
 Feature based approach of creating react-redux applications.
-##Includes
+## Includes
 - React
 - Redux
 - Babel for ES6/7 syntax support (including class properties, generators)
@@ -10,7 +10,7 @@ Feature based approach of creating react-redux applications.
 - Gulp for managing build tasks (including webpack task too)
 - Bluebird
 
-##Proposed tructure
+## Proposed structure
 - src - application source directory
 	- components - common components which are expected to be reusmked by other components.
 	- constants - application constants. Consists of mirrored values and key-value pairs.
