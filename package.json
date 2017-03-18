@@ -1,7 +1,7 @@
 {
   "name": "react-redux-template",
   "version": "0.1.0",
-  "description": "React, redux template with babel, webpack, scss, gulp ",
+  "description": "React redux feature-based template with scalable structure. Includes Webpack, Babel, Gulp, SCSS support and Dev/Prod build tasks",
   "main": "index.js",
   "scripts": {
     "dev": "gulp start-dev",
