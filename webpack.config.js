@@ -18,7 +18,7 @@ var webpack = require('webpack'),
 
 module.exports = {
 	entry: {
-		index: './src/index'
+		bundle: './src/index'
 	},
 	output: {
 		filename: 'js/[name].js',
