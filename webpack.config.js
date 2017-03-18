@@ -18,7 +18,7 @@ var webpack = require('webpack'),
 
 module.exports = {
 	entry: {
-		client: './src/index'
+		index: './src/index'
 	},
 	output: {
 		filename: 'js/[name].js',
