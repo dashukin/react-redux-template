@@ -30,18 +30,18 @@ import yargs from 'yargs';
 
 const {argv} = yargs;
 
-const clientBuildPath = './client/build';
+const clientBuildPath = './build';
 
 // JS files
-const clientJsSrcPath = './client/src/**/*.js';
+const clientJsSrcPath = './src/**/*.js';
 // output directory will be additionally controlled by webpack configuration. 
 // so only root build category is required
-const clientJsBuildPath = './client/build';
+const clientJsBuildPath = './build';
 
 // SCSS files
-const clientScssSrcPath = './client/src/scss/**/*.scss';
-const clientScssWatchPath = './client/src/**/*.scss';
-const clientScssBuildPath = './client/build/css';
+const clientScssSrcPath = './src/scss/**/*.scss';
+const clientScssWatchPath = './src/**/*.scss';
+const clientScssBuildPath = './build/css';
 
 // Clean all built files
 gulp.task('clean', () => {
