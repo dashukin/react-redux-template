@@ -3,7 +3,7 @@
  */
 
 /**
- * @nape webpack
+ * @name webpack
  * @type {Object}
  * @property NoEmitOnErrorsPlugin
  */
@@ -18,12 +18,12 @@ var webpack = require('webpack'),
 
 module.exports = {
 	entry: {
-		client: './client/src/index'
+		client: './src/index'
 	},
 	output: {
 		filename: 'js/[name].js',
-		path: path.resolve(__dirname, './client/build/js'),
-		publicPath: '../client/build/'
+		path: path.resolve(__dirname, './build/js'),
+		publicPath: '../build/'
 	},
 	module: {
 		loaders: [{
