@@ -15,7 +15,7 @@ Feature based approach of creating react-redux applications.
 	- components - common components which are expected to be reusmked by other components.
 	- constants - application constants. Consists of mirrored values and key-value pairs.
 	- data - a place for any common reducers or sagas that doesn't below directly to any component.
-	- scenes - 
+	- scenes - unique root components. Think about like pages or screens of your application.
 	- scss - common directory for scss stylesheets. Should consist of common files with appropriate imports from scenes and common components.
 	- services - common directory for any services used in application.
 - build - application output directory
