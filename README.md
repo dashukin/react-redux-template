@@ -35,3 +35,16 @@ Feature based approach of creating react-redux applications.
 	- reducer.js - component reducer (for container component).
 	- actions.js - component actions to interact with application state (for container component).
 	- saga.js - component saga to manage asynchronous actions (for container component).
+	
+## Dev / Build tasks
+- npm run dev - default task for developing. Includes:
+	- clean build directory.
+	- create javascript output files.
+	- create css build files.
+	- add javascript/scss watchers.
+- npm run build - default task for creating production build. Includes:
+	- clean build directory.
+	- create javascript output files with "production" flag and uglify plugin.
+	- create scss files.
+
+
