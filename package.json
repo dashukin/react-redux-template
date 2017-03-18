@@ -1,0 +1,57 @@
+{
+  "name": "react-redux-template",
+  "version": "0.1.0",
+  "description": "React, redux template with babel, webpack, scss, gulp ",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp start-dev",
+    "build": "gulp build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dashukin/react-redux-template.git"
+  },
+  "keywords": [
+    "React",
+    "redux",
+    "redux-saga",
+    "feature-based",
+    "scss",
+    "webpack",
+    "gulp"
+  ],
+  "author": "Vasili Molakhau <dashukin@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dashukin/react-redux-template/issues"
+  },
+  "homepage": "https://github.com/dashukin/react-redux-template#readme",
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-regenerator": "^6.22.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-latest": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "bluebird": "^3.5.0",
+    "del": "^2.2.2",
+    "file-loader": "^0.10.1",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-webpack": "^1.5.0",
+    "immutable": "^3.8.1",
+    "keymirror": "^0.1.1",
+    "lodash": "^4.17.4",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
+    "redux-saga": "^0.14.3",
+    "run-sequence": "^1.2.2",
+    "webpack": "^2.2.1",
+    "yargs": "^7.0.2"
+  }
+}

@@ -1,0 +1,4 @@
+{
+	"presets": ["react", "latest"],
+	"plugins": ["transform-object-rest-spread", "transform-class-properties", "transform-regenerator"]
+}
