@@ -77,7 +77,9 @@ gulp.task('build-js:prod', () => {
 		}),
 		new webpack.optimize.UglifyJsPlugin()
 	)
-	
+
+	prodConfig.devtool = "#cheap-module-source-map"
+
 	return gulp.src(clientJsSrcPath)
 		.pipe(gulpWebpack(prodConfig))
 		.pipe(gulp.dest(clientJsBuildPath));
