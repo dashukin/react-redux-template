@@ -29,7 +29,7 @@ Feature based approach of creating react-redux applications.
 	 	- ChildComponent - child component which follows the same structure. Child components could only be used by any parent components, but not by sibling one.
 	 	- ...
 	- /images - any images required by ExampleComponentName and loaded via require/import.
-	- _example-component-name.scss - component styles. Each parent component stylesheet should import all it's 
+	- _example-component-name.scss - component styles. Each parent component stylesheet should import all it's direct child components styles.
 	- presenter.js / container.js - component file itself. Depending on component role and ability to manage application state it could be a presenter or a container.
 	- index.js - default export file.
 	- reducer.js - component reducer (for container component).
