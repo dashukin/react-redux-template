@@ -6,10 +6,12 @@
  */
 
 /**
- * @name webpack
+ * @name webpack2
  * @property DefinePlugin
  * @property DedupePlugin
  * @property UglifyJsPlugin
+ * @property LoaderOptionsPlugin
+ * @property HotModuleReplacementPlugin
  */
 
 /**
@@ -22,7 +24,7 @@
 import gulp from 'gulp';
 import del from 'del';
 import sass from 'gulp-sass';
-import webpack from 'webpack';
+import webpack2 from 'webpack';
 import gulpWebpack from 'gulp-webpack';
 import webpackConfig from './webpack.config';
 import runSequence from 'run-sequence';
@@ -51,7 +53,7 @@ gulp.task('clean', () => {
 // Javascript build tasks
 gulp.task('build-js:dev', () => {
 	return gulp.src(clientJsSrcPath)
-		.pipe(gulpWebpack(webpackConfig))
+		.pipe(gulpWebpack(webpackConfig, webpack2))
 		.pipe(gulp.dest(clientJsBuildPath))
 });
 
@@ -59,29 +61,52 @@ gulp.task('watch-js:dev', () => {
 	
 	let webpackDevWatchConfig = Object.create(webpackConfig);
 	webpackDevWatchConfig.watch = true;
-	
+	webpackDevWatchConfig.plugins.concat(
+		new webpack.HotModuleReplacementPlugin()
+	);
+
 	return gulp.src(clientJsSrcPath)
-		.pipe(gulpWebpack(webpackDevWatchConfig))
+		.pipe(gulpWebpack(webpackDevWatchConfig), webpack2)
 		.pipe(gulp.dest(clientJsBuildPath));
 });
 
 gulp.task('build-js:prod', () => {
 	
-	let prodConfig = Object.create(webpackConfig);
+	let prodConfig = Object.create(require('./webpack.config'));
 	
 	prodConfig.plugins = prodConfig.plugins.concat(
-		new webpack.DefinePlugin({
+		new webpack2.DefinePlugin({
 			"process.env": {
 				"NODE_ENV": JSON.stringify("production")
 			}
 		}),
-		new webpack.optimize.UglifyJsPlugin()
-	)
+		new webpack2.LoaderOptionsPlugin({
+			minimize: true,
+			debug: false
+		}),
+		new webpack2.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false,
+				screw_ie8: true,
+				conditionals: true,
+				unused: true,
+				comparisons: true,
+				sequences: true,
+				dead_code: true,
+				evaluate: true,
+				if_return: true,
+				join_vars: true,
+			},
+			output: {
+				comments: false,
+			},
+		})
+	);
 
-	prodConfig.devtool = "#cheap-module-source-map"
+	prodConfig.devtool = "#source-map";
 
 	return gulp.src(clientJsSrcPath)
-		.pipe(gulpWebpack(prodConfig))
+		.pipe(gulpWebpack(prodConfig, webpack2))
 		.pipe(gulp.dest(clientJsBuildPath));
 });
 
