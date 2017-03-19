@@ -4,7 +4,7 @@ Feature based approach of creating react-redux applications.
 - React
 - Redux
 - Babel for ES6/7 syntax support (including class properties, generators)
-- Redux-saga for managing asynchronous events
+- Redux-saga for handling side effects
 - SCSS syntax support
 - Webpack for handling file and module imports
 - Gulp for managing build tasks (including webpack task too)
