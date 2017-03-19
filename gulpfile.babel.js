@@ -11,6 +11,7 @@
  * @property DedupePlugin
  * @property UglifyJsPlugin
  * @property LoaderOptionsPlugin
+ * @property AggressiveMergingPlugin
  * @property HotModuleReplacementPlugin
  */
 
@@ -26,6 +27,7 @@ import del from 'del';
 import sass from 'gulp-sass';
 import webpack2 from 'webpack';
 import gulpWebpack from 'gulp-webpack';
+import CompressionPlugin from 'compression-webpack-plugin';
 import webpackConfig from './webpack.config';
 import runSequence from 'run-sequence';
 import yargs from 'yargs';
@@ -84,6 +86,7 @@ gulp.task('build-js:prod', () => {
 			minimize: true,
 			debug: false
 		}),
+		new webpack2.optimize.AggressiveMergingPlugin(),
 		new webpack2.optimize.UglifyJsPlugin({
 			compress: {
 				warnings: false,
@@ -100,6 +103,13 @@ gulp.task('build-js:prod', () => {
 			output: {
 				comments: false,
 			},
+		}),
+		new CompressionPlugin({
+			asset: "[path].gz[query]",
+			algorithm: "gzip",
+			test: /\.js$|\.css$|\.html$/,
+			threshold: 10240,
+			minRatio: 0.8
 		})
 	);
 
