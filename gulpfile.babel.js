@@ -64,11 +64,11 @@ gulp.task('watch-js:dev', () => {
 	let webpackDevWatchConfig = Object.create(webpackConfig);
 	webpackDevWatchConfig.watch = true;
 	webpackDevWatchConfig.plugins.concat(
-		new webpack.HotModuleReplacementPlugin()
+		new webpack2.HotModuleReplacementPlugin()
 	);
 
 	return gulp.src(clientJsSrcPath)
-		.pipe(gulpWebpack(webpackDevWatchConfig), webpack2)
+		.pipe(gulpWebpack(webpackDevWatchConfig, webpack2))
 		.pipe(gulp.dest(clientJsBuildPath));
 });
 
