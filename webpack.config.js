@@ -37,5 +37,17 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.NoEmitOnErrorsPlugin()
-	]
+	],
+	devtool: '#cheap-module-eval-source-map',
+	resolve: {
+		alias: {
+			src: path.resolve(__dirname, 'src'),
+			components: path.resolve(__dirname, 'src/components'),
+			constants: path.resolve(__dirname, 'src/constants'),
+			data: path.resolve(__dirname, 'src/data'),
+			scenes: path.resolve(__dirname, 'src/scenes'),
+			scss: path.resolve(__dirname, 'src/scss'),
+			services: path.resolve(__dirname, 'src/services')
+		}
+	}
 };
