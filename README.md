@@ -13,7 +13,7 @@ Feature based approach of creating react-redux applications.
 ## Proposed app structure
 - /src - application source directory
 	- /components - common components which are expected to be reused by other components.
-	- /constants - application constants. Consists of mirrored values and key-value pairs.
+	- /constants - common application constants that should be used across whole project. Consists of mirrored values and key-value pairs.
 	- /data - a place for any common reducers or sagas that doesn't below directly to any component.
 	- /scenes - unique root components. Think about like pages or screens of your application.
 	- /scss - common directory for scss stylesheets. Should consist of common files with appropriate imports from scenes and common components.
@@ -33,6 +33,7 @@ Feature based approach of creating react-redux applications.
 	- presenter.js / container.js - component file itself. Depending on component role and ability to manage application state it could be a presenter or a container.
 	- index.js - default export file.
 	- reducer.js - component reducer (for container component).
+	- constants.js - component related constants to use with appropriate actions and reducer.
 	- actions.js - component actions to interact with application state (for container component).
 	- saga.js - component saga to manage asynchronous actions (for container component).
 
@@ -57,7 +58,8 @@ export default reducers;
 
 ```javascript
 // /src/scenes/ExampleComponent
-import exampleChildReducer from './components/ExampleChild/reducer';
+// components path configured as alias in webpack config
+import exampleChildReducer from 'components/ExampleChild/reducer';
 
 const exampleReducer = (state, action) => {
 	switch (action.type) {
@@ -77,8 +79,8 @@ export default reducers;
 
 ```javascript
 // /src/reducer.js - root reducer
-
-import exampleReducer from './scenes/ExampleComponent';
+// scenes path configured as alias in webpack config
+import exampleReducer from 'scenes/ExampleComponent';
 
 const reducers = {
 	...exampleReducer
