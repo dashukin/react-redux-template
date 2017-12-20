@@ -1,3 +1,0 @@
-/*
-* Common components export file
-* */

@@ -6,7 +6,7 @@
  */
 
 /**
- * @name webpack2
+ * @name webpack3
  * @property DefinePlugin
  * @property DedupePlugin
  * @property UglifyJsPlugin
@@ -25,27 +25,25 @@
 import gulp from 'gulp';
 import del from 'del';
 import sass from 'gulp-sass';
-import webpack2 from 'webpack';
-import gulpWebpack from 'gulp-webpack';
-import CompressionPlugin from 'compression-webpack-plugin';
+import webpack3 from 'webpack';
+import webpackStream from 'webpack-stream';
 import webpackConfig from './webpack.config';
 import runSequence from 'run-sequence';
-import yargs from 'yargs';
+import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 
-const {argv} = yargs;
 
-const clientBuildPath = './build';
+const clientBuildPath = './dist';
 
 // JS files
 const clientJsSrcPath = './src/**/*.js';
-// output directory will be additionally controlled by webpack configuration. 
+// output directory will be additionally controlled by webpack configuration.
 // so only root build category is required
-const clientJsBuildPath = './build';
+const clientJsBuildPath = './dist';
 
 // SCSS files
 const clientScssSrcPath = './src/scss/**/*.scss';
 const clientScssWatchPath = './src/**/*.scss';
-const clientScssBuildPath = './build/css';
+const clientScssBuildPath = './dist/css';
 
 // Clean all built files
 gulp.task('clean', () => {
@@ -54,40 +52,50 @@ gulp.task('clean', () => {
 
 // Javascript build tasks
 gulp.task('build-js:dev', () => {
+	let webpackDevBuildConfig = Object.create(webpackConfig);
+	webpackDevBuildConfig.plugins = webpackDevBuildConfig.plugins.concat(
+		new ProgressBarPlugin({
+			clear: false
+		})
+	);
+
 	return gulp.src(clientJsSrcPath)
-		.pipe(gulpWebpack(webpackConfig, webpack2))
+		.pipe(webpackStream(webpackDevBuildConfig, webpack3))
 		.pipe(gulp.dest(clientJsBuildPath))
 });
 
 gulp.task('watch-js:dev', () => {
-	
+
 	let webpackDevWatchConfig = Object.create(webpackConfig);
 	webpackDevWatchConfig.watch = true;
-	webpackDevWatchConfig.plugins.concat(
-		new webpack2.HotModuleReplacementPlugin()
+	webpackDevWatchConfig.plugins = webpackDevWatchConfig.plugins.concat(
+		new webpack3.HotModuleReplacementPlugin(),
+		new ProgressBarPlugin({
+			clear: false
+		})
 	);
 
 	return gulp.src(clientJsSrcPath)
-		.pipe(gulpWebpack(webpackDevWatchConfig, webpack2))
+		.pipe(webpackStream(webpackDevWatchConfig, webpack3))
 		.pipe(gulp.dest(clientJsBuildPath));
 });
 
 gulp.task('build-js:prod', () => {
-	
-	let prodConfig = Object.create(require('./webpack.config'));
-	
+
+	let prodConfig = Object.create(webpackConfig);
+
 	prodConfig.plugins = prodConfig.plugins.concat(
-		new webpack2.DefinePlugin({
+		new webpack3.DefinePlugin({
 			"process.env": {
 				"NODE_ENV": JSON.stringify("production")
 			}
 		}),
-		new webpack2.LoaderOptionsPlugin({
+		new webpack3.LoaderOptionsPlugin({
 			minimize: true,
 			debug: false
 		}),
-		new webpack2.optimize.AggressiveMergingPlugin(),
-		new webpack2.optimize.UglifyJsPlugin({
+		new webpack3.optimize.AggressiveMergingPlugin(),
+		new webpack3.optimize.UglifyJsPlugin({
 			compress: {
 				warnings: false,
 				screw_ie8: true,
@@ -98,25 +106,21 @@ gulp.task('build-js:prod', () => {
 				dead_code: true,
 				evaluate: true,
 				if_return: true,
-				join_vars: true,
+				join_vars: true
 			},
 			output: {
 				comments: false,
 			},
 		}),
-		new CompressionPlugin({
-			asset: "[path].gz[query]",
-			algorithm: "gzip",
-			test: /\.js$|\.css$|\.html$/,
-			threshold: 10240,
-			minRatio: 0.8
+		new ProgressBarPlugin({
+			clear: false
 		})
 	);
 
-	prodConfig.devtool = "#source-map";
+	prodConfig.devtool = "#cheap-module-source-map";
 
 	return gulp.src(clientJsSrcPath)
-		.pipe(gulpWebpack(prodConfig, webpack2))
+		.pipe(webpackStream(prodConfig, webpack3))
 		.pipe(gulp.dest(clientJsBuildPath));
 });
 
@@ -137,7 +141,7 @@ gulp.task('watch-scss', () => {
 });
 
 
-// Dev task 
+// Dev task
 gulp.task('start-dev', () => {
 	runSequence(
 		'clean',

@@ -2,10 +2,10 @@
 * Root reducer
 * */
 
-import AppReducer from './scenes/AppRoot/reducer';
+import scenesReducer				from 'scenes/Scenes/reducer';
 
 const reducers = {
-	...AppReducer
+	...scenesReducer
 };
 
 export default reducers;

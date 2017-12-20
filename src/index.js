@@ -5,29 +5,56 @@
 // required for async/await and generators
 import 'babel-polyfill';
 
-import config from './config';
+import config			from './config';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {createStore, combineReducers, applyMiddleware} from 'redux';
-import {Provider} from 'react-redux';
-import createSagaMiddleware from 'redux-saga';
-import {default as reducers} from './reducer';
-import rootSaga from './saga';
+import React			from 'react';
+import ReactDOM			from 'react-dom';
+import {Provider}		from 'react-redux';
+import ApiService		from 'services/Api/ApiService';
 
-import AppRoot from './scenes/AppRoot';
+// import scenes
+import Scenes from 'scenes/Scenes/index';
 
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(combineReducers(reducers), applyMiddleware(sagaMiddleware));
+// import material-ui dependencies
+import createMuiTheme		from 'material-ui/styles/createMuiTheme';
+import {MuiThemeProvider}	from 'material-ui/styles';
+import primary				from 'src/colorPallete/primary';
+import error				from 'src/colorPallete/error';
+import ascent				from 'src/colorPallete/ascent';
 
-sagaMiddleware.run(rootSaga);
+// create store
+import store from './store';
 
-const ConnectedApp = () => {
+// configure Api Service
+ApiService.configure({
+	requestInterceptor: (request) => {
+
+	},
+	responseInterceptor: (response) => {
+
+	},
+	errorInterceptor: function (error) {
+
+	}
+});
+
+const muiTheme = createMuiTheme({
+	palette: {
+		primary: primary,
+		secondary: ascent,
+		error: error
+	}
+});
+
+// create root application
+const App = () => {
 	return (
 		<Provider store={store}>
-			<AppRoot />
+			<MuiThemeProvider theme={muiTheme}>
+				<Scenes />
+			</MuiThemeProvider>
 		</Provider>
 	);
 };
 
-ReactDOM.render(<ConnectedApp />, document.getElementById(config.rootId));
+ReactDOM.render(<App />, document.getElementById(config.ROOT_ID));

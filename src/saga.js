@@ -2,11 +2,13 @@
 * Root saga
 * */
 
-// import any required saga
+
+import {watchScenes} from 'scenes/Scenes/saga';
+
 
 const rootSaga = function* () {
 	yield [
-		// add any required saga here
+		watchScenes()
 	];
 };
 

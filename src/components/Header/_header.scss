@@ -1,0 +1,56 @@
+.header {
+
+	box-shadow: none !important;
+
+	& &__toolbar {
+		display: flex;
+		flex-direction: row;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+		padding-right: 5px;
+
+		&-logo-link {
+			display: block;
+			min-width: 150px;
+			max-width: 150px;
+
+			> img {
+				display: block;
+				max-width: 100%;
+				max-height: 25px;
+				width: auto;
+				height: auto;
+			}
+		}
+
+		&-title {
+			flex-basis: 100%;
+		}
+	}
+
+	& &__button {
+		color: #fff;
+
+		&-cart {
+			color: #164569;
+
+			&-badge {
+				//background-color: rgba(44, 137, 209, 0.6);
+				background-color: transparent;
+			}
+
+			&--authorized {
+				color: #fff;
+			}
+		}
+	}
+
+	&-menu__list {
+
+		&-item {
+
+			& &-text {
+				padding-left: 0;
+			}
+		}
+	}
+}

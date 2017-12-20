@@ -1,0 +1,28 @@
+@import './components/Home/_home_scene.scss';
+
+.app-scenes {
+
+}
+
+.scene {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	padding-top: 56px; // for sticky appbar
+
+	&-content {
+		flex-basis: 100%;
+		flex-grow: 1;
+
+		/**
+			center loader
+		 */
+		&--loading,
+		&--full-height {
+			display: flex;
+			align-items: center;
+			flex-direction: row;
+			justify-content: center;
+		}
+	}
+}
