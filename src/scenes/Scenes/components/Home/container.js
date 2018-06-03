@@ -6,7 +6,7 @@ import React, {Component}	from 'react';
 import {connect}			from 'react-redux';
 import {withRouter}			from 'react-router-dom';
 
-import BaseScene			from 'components/BaseScene';
+import BaseScene			from 'components/base-scene';
 
 class Home extends Component {
 

@@ -1,0 +1,1 @@
+export {alias} from './webpack.alias';

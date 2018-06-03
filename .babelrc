@@ -1,4 +1,15 @@
 {
-	"presets": ["react", "env"],
-	"plugins": ["transform-object-rest-spread", "transform-class-properties", "transform-regenerator", "transform-decorators-legacy"]
+	"presets": [
+		"react",
+		["env", {
+		  "targets": {
+			"browsers": ["last 2 versions", "safari >= 7"]
+		  }
+		}]
+	],
+	"plugins": [
+		"transform-object-rest-spread",
+		"transform-class-properties",
+		"transform-regenerator"
+	]
 }

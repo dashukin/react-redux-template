@@ -15,13 +15,6 @@ import ApiService		from 'services/Api/ApiService';
 // import scenes
 import Scenes from 'scenes/Scenes/index';
 
-// import material-ui dependencies
-import createMuiTheme		from 'material-ui/styles/createMuiTheme';
-import {MuiThemeProvider}	from 'material-ui/styles';
-import primary				from 'src/colorPallete/primary';
-import error				from 'src/colorPallete/error';
-import ascent				from 'src/colorPallete/ascent';
-
 // create store
 import store from './store';
 
@@ -38,21 +31,12 @@ ApiService.configure({
 	}
 });
 
-const muiTheme = createMuiTheme({
-	palette: {
-		primary: primary,
-		secondary: ascent,
-		error: error
-	}
-});
 
 // create root application
 const App = () => {
 	return (
 		<Provider store={store}>
-			<MuiThemeProvider theme={muiTheme}>
-				<Scenes />
-			</MuiThemeProvider>
+			<Scenes />
 		</Provider>
 	);
 };
