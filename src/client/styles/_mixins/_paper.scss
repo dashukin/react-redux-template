@@ -1,0 +1,20 @@
+@import './mq';
+@import './box-shadow';
+
+@mixin paper ($size: l) {
+	padding: 16px;
+
+	@include bp-min(l) {
+		padding: 24px;
+
+		@if $size == l {
+			border-radius: 10px;
+		}
+
+		@else if $size == s {
+			border-radius: 5px;
+		}
+
+		@include box-shadow;
+	}
+}

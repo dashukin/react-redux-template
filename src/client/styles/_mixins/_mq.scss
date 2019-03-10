@@ -1,0 +1,162 @@
+@import '../_variables/mq';
+@import 'media-queries';
+
+/// Apply styles only if viewport width is equal to or less than $breakpoint
+/// @param {String} $breakpoint - breakpoint name
+/// @example scss
+/// .element {
+///   @include bp-min(s)
+///     color: red;
+///   }
+/// }
+@mixin bp-min($breakpoint) {
+	@include min-screen(map-get($breakpoints, $breakpoint)) {
+		@content;
+	}
+}
+
+/// Apply styles only if viewport width is equal to or narrower than $breakpoint
+/// @param {String} $breakpoint - breakpoint name
+/// @example scss
+/// .element {
+///   @include bp-max(s) {
+///     color: blue;
+///   }
+/// }
+@mixin bp-max($breakpoint) {
+	@include max-screen(map-get($breakpoints, $breakpoint) - 1) {
+		@content;
+	}
+}
+
+/// Apply styles for small screen
+/// @example scss
+/// .element {
+///   @include bp-xs {
+///     color: blue;
+///   }
+/// }
+@mixin bp-xs {
+	@include max-screen(map-get($breakpoints, s) - 1) {
+		@content;
+	}
+}
+
+/// Apply styles for small screen
+/// @example scss
+/// .element {
+///   @include bp-s {
+///     color: blue;
+///   }
+/// }
+@mixin bp-s {
+	@include screen(map-get($breakpoints, s), map-get($breakpoints, m) - 1) {
+		@content;
+	}
+}
+
+/// Apply styles for medium screen
+/// @example scss
+/// .element {
+///   @include bp-m {
+///     color: blue;
+///   }
+/// }
+@mixin bp-m {
+	@include screen(map-get($breakpoints, m), map-get($breakpoints, l) - 1) {
+		@content;
+	}
+}
+
+/// Apply styles for large screen
+/// @example scss
+/// .element {
+///   @include bp-l {
+///     color: blue;
+///   }
+/// }
+@mixin bp-l {
+	@include screen(map-get($breakpoints, l), map-get($breakpoints, xl) - 1) {
+		@content;
+	}
+}
+
+/// Apply styles for extra large screen
+/// @example scss
+/// .element {
+///   @include bp-xl {
+///     color: blue;
+///   }
+/// }
+@mixin bp-xl {
+	@include screen(map-get($breakpoints, xl), map-get($breakpoints, xxl) - 1) {
+		@content;
+	}
+}
+
+/// Apply styles for extra-extra large screen
+/// @example scss
+/// .element {
+///   @include bp-xxl {
+///     color: blue;
+///   }
+/// }
+@mixin bp-xxl {
+	@include min-screen(map-get($breakpoints, xxl)) {
+		@content;
+	}
+}
+
+/// Helper for grouping media-queries
+/// @group helpers
+/// @param {Arglist} $breakpoints - breakpoints names for grouping
+/// @example scss
+/// .element {
+///   @include bp(s, m, l) {
+///     color: red;
+///  }
+///  @include bp(xl, xxl) {
+///    color: blue;
+///  }
+/// }
+@mixin bp($breakpoints...) {
+	@for $i from 1 through length($breakpoints) {
+		$breakpoint: nth($breakpoints, $i);
+
+		@if $breakpoint == xs {
+			@include bp-xs {
+				@content;
+			}
+		}
+
+		@if $breakpoint == s {
+			@include bp-s {
+				@content;
+			}
+		}
+
+		@if $breakpoint == m {
+			@include bp-m {
+				@content;
+			}
+		}
+
+		@if $breakpoint == l {
+			@include bp-l {
+				@content;
+			}
+		}
+
+		@if $breakpoint == xl {
+			@include bp-xl {
+				@content;
+			}
+		}
+
+		@if $breakpoint == xxl {
+			@include bp-xxl {
+				@content;
+			}
+		}
+	}
+}

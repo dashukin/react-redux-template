@@ -1,0 +1,39 @@
+@import 'scss/_variables/_width';
+@import 'scss/_mixins/mq';
+
+@mixin max-width($breakpoint) {
+	width: 100%;
+	max-width: map_get($width, $breakpoint);
+	margin-right: auto;
+	margin-left: auto;
+}
+
+@mixin page-content-paddings() {
+	padding-right: 0;
+	padding-left: 0;
+
+	@include bp-m() {
+		padding-right: 16px;
+		padding-left: 16px;
+	}
+
+	@include bp-min(l) {
+		padding-right: 24px;
+		padding-left: 24px;
+	}
+}
+
+@mixin page-content-width() {
+	@include max-width(xl);
+	@include page-content-paddings;
+}
+
+@mixin page-info-width() {
+	@include max-width(l);
+	@include page-content-paddings;
+}
+
+@mixin page-job-form-width() {
+	@include max-width(l);
+	@include page-content-paddings;
+}
