@@ -69,6 +69,8 @@
     "yargs": "^13.2.2"
   },
   "jusky": {
-    "pre-commit": "npm run lint"
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }
