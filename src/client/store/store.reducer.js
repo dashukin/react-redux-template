@@ -2,7 +2,7 @@
 * Root reducer
 * */
 
-import scenesReducer from 'scenes/Scenes/reducer';
+import scenesReducer from 'src/client/scenes/reducer';
 
 const reducers = {
 	...scenesReducer

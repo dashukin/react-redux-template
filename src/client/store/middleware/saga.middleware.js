@@ -3,7 +3,7 @@
  */
 
 import createSagaMiddleware from 'redux-saga';
-import rootSaga from 'src/saga';
+import rootSaga from 'src/client/store/store.saga';
 
 export const sagaMiddleware = createSagaMiddleware();
 

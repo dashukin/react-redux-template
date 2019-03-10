@@ -10,8 +10,8 @@ import {
 	compose
 }								from 'redux';
 import createSagaMiddleware		from 'redux-saga';
-import {default as reducers}	from './reducer';
-import rootSaga					from './saga';
+import {default as reducers}	from './store.reducer';
+import rootSaga					from './store.saga';
 
 // import routing dependencies
 import {
@@ -19,7 +19,7 @@ import {
 	routerMiddleware
 }								from 'react-router-redux';
 
-import history					from './history';
+import history					from './history/history';
 const historyMiddleware = routerMiddleware(history);
 
 // create saga middleware

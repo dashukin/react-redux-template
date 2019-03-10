@@ -2,7 +2,7 @@
 * Routing service to manage manual redirects
 * */
 
-import store from 	'src/store';
+import store from 'src/client/store/store';
 import {push} from 	'react-router-redux';
 
 const routes = {

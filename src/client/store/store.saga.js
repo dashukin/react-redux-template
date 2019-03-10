@@ -3,7 +3,7 @@
 * */
 
 
-import {watchScenes} from 'scenes/Scenes/saga';
+import {watchScenes} from 'src/client/scenes/saga';
 
 
 const rootSaga = function* () {

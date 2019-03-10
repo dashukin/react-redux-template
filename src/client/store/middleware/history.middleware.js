@@ -2,6 +2,6 @@
 * History middleware
 * */
 
-import {historyMiddleWare} from '../app-history';
+import {historyMiddleWare} from '../client/app-history';
 
 export default historyMiddleWare;
