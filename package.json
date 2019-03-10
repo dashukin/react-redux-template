@@ -1,7 +1,7 @@
 {
   "name": "react-redux-template",
   "version": "0.1.0",
-  "description": "React redux feature-based template with scalable structure. Includes Webpack, Babel, Gulp, SCSS support and Dev/Prod build tasks",
+  "description": "React redux feature-based template with scalable structure. Includes Webpack, Babel, SCSS support and Dev/Prod build tasks",
   "main": "index.js",
   "scripts": {
     "build:app": "webpack --config config/webpack/webpack.config.babel.js",
@@ -61,6 +61,7 @@
     "react-router-redux": "^4.0.8",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2",
+    "reselect": "^4.0.0",
     "store2": "^2.7.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
