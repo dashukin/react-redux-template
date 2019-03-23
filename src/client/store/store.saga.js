@@ -3,13 +3,8 @@
 * */
 
 
-import {watchScenes} from 'src/client/scenes/saga';
+function* rootSaga () {
 
-
-const rootSaga = function* () {
-	yield [
-		watchScenes()
-	];
-};
+}
 
 export default rootSaga;

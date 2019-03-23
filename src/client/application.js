@@ -3,20 +3,20 @@
 * */
 
 // required for async/await and generators
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 // import scenes
-import Scenes from 'scenes/index';
+import Scenes from './scenes/index';
 
 // create store
 import store from './store/store';
 
 // create root application
-const App = () => {
+const CreateApp = () => {
 	return (
 		<Provider store={store}>
 			<Scenes />
@@ -24,4 +24,4 @@ const App = () => {
 	);
 };
 
-ReactDOM.render(<App />, document.getElementById('application'));
+ReactDOM.render(<CreateApp />, document.getElementById('application'));
