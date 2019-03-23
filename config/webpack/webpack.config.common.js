@@ -17,7 +17,7 @@ import {
 	ImageRules,
 } from './rules';
 
-import {alias} from './resolve';
+import { alias } from './resolve';
 
 import {
 	APP_SRC_ENTRY,
@@ -45,9 +45,7 @@ const config = {
 			maxInitialRequests: 5,
 			maxAsyncRequests: 5,
 			automaticNameDelimiter: '-',
-			cacheGroups: {
-
-			},
+			cacheGroups: {},
 		},
 	},
 
@@ -67,7 +65,7 @@ const config = {
 		inlineSourcePlugin(),
 	],
 	resolve: {
-		alias: alias
+		alias: alias()
 	}
 };
 
