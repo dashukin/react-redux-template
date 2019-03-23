@@ -2,11 +2,11 @@
 * Webpack image rules
 * */
 
-import {webpackImageLoader} from '../loaders';
+import { webpackImageLoader } from '../loaders';
 
-export default {
+export default () => ({
 	test: /\.(png|jpg|gif)$/,
 	use: [
 		webpackImageLoader(),
 	],
-};
+});

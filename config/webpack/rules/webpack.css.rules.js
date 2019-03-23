@@ -7,7 +7,7 @@ import {
 
 const PATTERN = '\\.s?css$';
 
-export default {
+export default () => ({
 	test: new RegExp(PATTERN),
 	use: [
 		webpackStyleLoader(),
@@ -15,5 +15,5 @@ export default {
 		webpackPostcssLoader(),
 		webpackSassLoader(),
 	],
-};
+});
 

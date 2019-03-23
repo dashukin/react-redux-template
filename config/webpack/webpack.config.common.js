@@ -51,9 +51,9 @@ const config = {
 
 	module: {
 		rules: [
-			JSRules,
-			CSSRules,
-			ImageRules,
+			JSRules(),
+			CSSRules(),
+			ImageRules(),
 		]
 	},
 	plugins: [

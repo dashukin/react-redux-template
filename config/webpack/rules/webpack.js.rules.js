@@ -2,12 +2,12 @@
 * webpack js rule
 * */
 
-import {webpackBabelLoader} from '../loaders';
+import { webpackBabelLoader } from '../loaders';
 
-export default {
+export default () => ({
 	test: /\.js$/,
 	exclude: /node_modules/,
 	use: [
 		webpackBabelLoader,
 	]
-};
+});
