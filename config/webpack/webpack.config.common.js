@@ -26,7 +26,7 @@ import {
 
 const config = {
 	entry: {
-		main: APP_SRC_ENTRY
+		main: ['@babel/polyfill', APP_SRC_ENTRY]
 	},
 	output: {
 		path: DIST_CLIENT_DIR,
