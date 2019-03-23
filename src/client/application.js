@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-
-// import pages
-import Scenes from './pages/index';
+import {
+	APPLICATION_ELEMENT_ID
+} from 'config/environment';
 
 // create store
 import store from './store/store';
 
-// create root application
-const CreateApp = () => {
+const createApplication = () => {
 	return (
 		<Provider store={store}>
 			<Scenes />
@@ -17,4 +16,10 @@ const CreateApp = () => {
 	);
 };
 
-ReactDOM.render(<CreateApp />, document.getElementById('application'));
+const renderApplication = () => {
+	const App = createApplication();
+
+	ReactDOM.render(<App />, document.getElementById(APPLICATION_ELEMENT_ID));
+}
+
+export default renderApplication;
