@@ -61,6 +61,7 @@
     "normalizr": "^3.3.0",
     "npm-run-parallel": "^0.6.0",
     "progress-bar-webpack-plugin": "^1.10.0",
+    "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-redux": "^6.0.1",
