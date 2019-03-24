@@ -4,7 +4,6 @@
 
 import {
 	cleanClientDirPlugin,
-	progressBarPlugin,
 	noEmitOnErrorPlugin,
 	miniCssExtractPlugin,
 	htmlPlugin,
@@ -26,7 +25,10 @@ import {
 
 const config = {
 	entry: {
-		main: ['@babel/polyfill', APP_SRC_ENTRY]
+		main: [
+			'@babel/polyfill',
+			APP_SRC_ENTRY
+		]
 	},
 	output: {
 		path: DIST_CLIENT_DIR,
@@ -53,7 +55,6 @@ const config = {
 			},
 		},
 	},
-
 	module: {
 		rules: [
 			JSRules(),
@@ -63,7 +64,6 @@ const config = {
 	},
 	plugins: [
 		cleanClientDirPlugin(),
-		progressBarPlugin(),
 		noEmitOnErrorPlugin(),
 		miniCssExtractPlugin(),
 		htmlPlugin(),

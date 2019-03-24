@@ -13,11 +13,14 @@
  */
 
 import webpack from 'webpack';
+import { progressBarPlugin } from './plugins';
 
 const config = {
 	devtool: '',
 	plugins: [
-
+		progressBarPlugin({
+			production: true
+		}),
 	],
 	watch: false
 };

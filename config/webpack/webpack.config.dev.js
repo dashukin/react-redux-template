@@ -13,11 +13,15 @@
  */
 
 import webpack from 'webpack';
+import { progressBarPlugin } from './plugins';
 
 const config = {
 	mode: 'development',
 	devtool: 'eval-source-map',
-	watch: true
+	watch: true,
+	plugins: [
+		progressBarPlugin(),
+	]
 };
 
 export default config;

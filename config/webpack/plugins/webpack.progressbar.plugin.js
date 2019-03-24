@@ -1,8 +1,17 @@
-import ProgressBarPlugin from 'progress-bar-webpack-plugin';
+import ProgressBarPlugin from 'webpackbar';
 
-export const progressBarPlugin = () => (
-	new ProgressBarPlugin({
-		format: '  build [:bar] :percent (:elapsed seconds)',
-		clear: false,
-	})
-);
+/**
+ *
+ * @param {String} [name]
+ * @param {Boolean} production
+ * @return {Object}
+ */
+export const progressBarPlugin = ({ name = 'Application', production } = {}) => {
+	const mode = production ? 'prod': 'dev';
+	const logName = `${name} (${mode})`;
+
+	return new ProgressBarPlugin({
+		name: logName,
+		minimal: production,
+	});
+};
