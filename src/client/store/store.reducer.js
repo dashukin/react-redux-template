@@ -1,9 +1,10 @@
-/*
-* Root reducer
-* */
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
 const reducers = {
 
 };
 
-export default reducers;
+const combinedReducers = combineReducers({ ...reducers, router: routerReducer });
+
+export default combinedReducers;

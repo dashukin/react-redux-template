@@ -1,42 +1,49 @@
-/*
-* Application store
-* */
+import { createStore, compose } from 'redux';
+import { END } from 'redux-saga';
+import get from 'lodash/get';
+import rootReducer from './store.reducer';
+import { createStoreMiddlewareEnhancer } from './store.middleware';
+import { runSaga } from './_middleware/saga.middleware';
+import rootSaga, { watchSaga } from './store.saga';
 
+const storeMidlewareEnhancer = createStoreMiddlewareEnhancer();
+const reduxDevtoolsCompose = get(window, '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__');
 
-import {
-	createStore,
-	combineReducers,
-	applyMiddleware,
-	compose
-}								from 'redux';
-import createSagaMiddleware		from 'redux-saga';
-import {default as reducers}	from './store.reducer';
-import rootSaga					from './store.saga';
+export const createAppStore = ({ preloadTasks = [], isSSR = false } = {}) => initialState => {
+	const isBrowser = typeof window === 'object';
+	const devToolsAvailable = isBrowser && (typeof reduxDevtoolsCompose === 'function');
+	const composer = devToolsAvailable ? reduxDevtoolsCompose : compose;
 
-// import routing dependencies
-import {
-	routerReducer,
-	routerMiddleware
-}								from 'react-router-redux';
+	return new Promise((resolve, reject) => {
+		const store = createStore(
+			rootReducer,
+			initialState,
+			composer(storeMidlewareEnhancer)
+		);
 
-import history					from './history/history';
-const historyMiddleware = routerMiddleware(history);
+		// temporary debug
+		if (!PRODUCTION && isBrowser) {
+			window.store = store;
+		}
 
-// create saga middleware
-const sagaMiddleware = createSagaMiddleware();
+		const mainTaskPromise = runSaga(rootSaga).done;
+		const preloadTasksPromises = preloadTasks.map(task => task(store.dispatch));
 
-// combine reducers
-const combinedReducers = combineReducers({...reducers, router: routerReducer});
+		const allPromises = [mainTaskPromise, ...preloadTasksPromises];
 
-// compose middleware
-const composedMiddleware = compose(applyMiddleware(sagaMiddleware), applyMiddleware(historyMiddleware));
+		// terminate all forked tasks to make promises be resolved
+		store.dispatch(END);
 
-// create store
-const store = createStore(combinedReducers, composedMiddleware);
+		Promise.all(allPromises)
+			.then(() => {
+				// Once all pending promises are resolved - reapply watchers for client side
+				if (!isSSR) {
+					runSaga(watchSaga);
+				}
+				resolve(store);
+			}).catch(error => {
+				reject(error);
+		});
+	});
+};
 
-// run root saga
-sagaMiddleware.run(rootSaga);
-
-window.store = store;
-
-export default store;
