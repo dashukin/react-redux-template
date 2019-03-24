@@ -45,7 +45,12 @@ const config = {
 			maxInitialRequests: 5,
 			maxAsyncRequests: 5,
 			automaticNameDelimiter: '-',
-			cacheGroups: {},
+			cacheGroups: {
+				vendors: {
+					test: /[\\/]node_modules[\\/]/,
+					name: 'vendors'
+				},
+			},
 		},
 	},
 
