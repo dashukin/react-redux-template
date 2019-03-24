@@ -13,7 +13,10 @@
  */
 
 import webpack from 'webpack';
-import { progressBarPlugin } from './plugins';
+import {
+	progressBarPlugin,
+	definePlugin,
+} from './plugins';
 
 const config = {
 	mode: 'development',
@@ -21,6 +24,9 @@ const config = {
 	watch: true,
 	plugins: [
 		progressBarPlugin(),
+		definePlugin({
+			PRODUCTION: JSON.stringify(false)
+		})
 	]
 };
 
