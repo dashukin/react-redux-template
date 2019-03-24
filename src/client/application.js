@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import {
 	APPLICATION_ELEMENT_ID
-} from 'config/environment';
+} from 'config/application';
 
 // create store
 import store from './store/store';

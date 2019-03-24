@@ -29,4 +29,3 @@ export const APP_SRC_TEMPLATE_ENTRY = path.resolve(APP_SRC_CLIENT_DIR, './index.
 export const DIST_DIR = path.resolve(ROOT_DIR, './dist');
 export const DIST_CLIENT_DIR = path.resolve(DIST_DIR, './client');
 
-export const APPLICATION_ELEMENT_ID = 'application';
