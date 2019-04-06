@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
+import page from 'src/client/store/pages/pages.reducer';
 
 const reducers = {
-
+	page,
 };
 
-const combinedReducers = combineReducers({ ...reducers, router: routerReducer });
+export const createCombinedReducers = (extraReducers) => (
+	combineReducers({ ...reducers, ...extraReducers})
+);
 
-export default combinedReducers;

@@ -1,7 +1,8 @@
 /*
 * Root saga
 * */
-import { fork } from 'redux-saga/effects';
+import { fork, all } from 'redux-saga/effects';
+import map from 'lodash/fp/map';
 
 const startSagas = [
 

@@ -8,6 +8,7 @@ import {
 	extractCSSChunksPlugin,
 	htmlPlugin,
 	inlineSourcePlugin,
+	definePlugin,
 } from './plugins';
 
 import {
@@ -68,6 +69,9 @@ const config = {
 		extractCSSChunksPlugin(),
 		htmlPlugin(),
 		inlineSourcePlugin(),
+		definePlugin({
+			SSR: JSON.stringify(false)
+		})
 	],
 	resolve: {
 		alias: alias()

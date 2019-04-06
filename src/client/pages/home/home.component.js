@@ -12,12 +12,4 @@ class HomePage extends PureComponent {
 	}
 }
 
-HomePage.propTypes = {
-
-};
-
-HomePage.defaultProps = {
-
-};
-
 export default HomePage;

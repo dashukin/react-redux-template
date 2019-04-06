@@ -1,12 +1,13 @@
 import { createStore, compose } from 'redux';
+import { connectRoutes } from 'redux-first-router';
 import { END } from 'redux-saga';
 import get from 'lodash/get';
-import rootReducer from './store.reducer';
+import { routesMap } from '../routes';
+import { createCombinedReducers } from './store.reducer';
 import { createStoreMiddlewareEnhancer } from './store.middleware';
 import { runSaga } from './_middleware/saga.middleware';
 import rootSaga, { watchSaga } from './store.saga';
 
-const storeMidlewareEnhancer = createStoreMiddlewareEnhancer();
 const reduxDevtoolsCompose = get(window, '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__');
 
 export const createAppStore = ({ preloadTasks = [], isSSR = false } = {}) => initialState => {
@@ -14,11 +15,20 @@ export const createAppStore = ({ preloadTasks = [], isSSR = false } = {}) => ini
 	const devToolsAvailable = isBrowser && (typeof reduxDevtoolsCompose === 'function');
 	const composer = devToolsAvailable ? reduxDevtoolsCompose : compose;
 
+	const { reducer, middleware, enhancer } = connectRoutes(routesMap);
+	const storeMidlewareEnhancer = createStoreMiddlewareEnhancer(middleware);
+
+	const combinedReducers = createCombinedReducers({
+		location: reducer
+	});
+
+	const storeEnhancers = composer(enhancer, storeMidlewareEnhancer);
+
 	return new Promise((resolve, reject) => {
 		const store = createStore(
-			rootReducer,
+			combinedReducers,
 			initialState,
-			composer(storeMidlewareEnhancer)
+			storeEnhancers
 		);
 
 		// temporary debug
@@ -42,7 +52,7 @@ export const createAppStore = ({ preloadTasks = [], isSSR = false } = {}) => ini
 				}
 				resolve(store);
 			}).catch(error => {
-				reject(error);
+			reject(error);
 		});
 	});
 };

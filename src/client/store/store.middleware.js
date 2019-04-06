@@ -5,8 +5,11 @@ import {
 	historyMiddleware
 } from './_middleware';
 
-export const createStoreMiddlewareEnhancer = () => applyMiddleware(
-	sagaMiddleware,
-	historyMiddleware,
-	loggerMiddleware
+export const createStoreMiddlewareEnhancer = (...extraMiddleware) => (
+	applyMiddleware(
+		sagaMiddleware,
+		historyMiddleware,
+		loggerMiddleware,
+		...extraMiddleware
+	)
 );
