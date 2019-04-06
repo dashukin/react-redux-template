@@ -2,7 +2,7 @@
 * Webpack postcss config
 * */
 
-export default ({file, options, env}) => ({
+module.exports = () => ({
 	parser: false,
 	plugins: {
 		autoprefixer: true,

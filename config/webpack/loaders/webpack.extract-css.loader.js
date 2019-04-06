@@ -3,12 +3,12 @@
 * */
 
 /**
- * @name MiniCssExtractPlugin
+ * @name ExtractCssChunks
  * @property {Function} loader
  */
 
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
 
-export const webpackExtractCssLoader = () =>  (
-	MiniCssExtractPlugin.loader
+export const webpackExtractCssLoader = () => (
+	ExtractCssChunks.loader
 );

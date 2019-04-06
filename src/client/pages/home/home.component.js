@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-// import './_home.scss';
+import './_home.scss';
 
 class HomePage extends PureComponent {
 	render() {

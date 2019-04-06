@@ -5,14 +5,14 @@
 import {
 	cleanClientDirPlugin,
 	noEmitOnErrorPlugin,
-	miniCssExtractPlugin,
+	extractCSSChunksPlugin,
 	htmlPlugin,
 	inlineSourcePlugin,
 } from './plugins';
 
 import {
 	JSRules,
-	CSSRules,
+	CSSRulesClient,
 	ImageRules,
 } from './rules';
 
@@ -58,14 +58,14 @@ const config = {
 	module: {
 		rules: [
 			JSRules(),
-			CSSRules(),
+			CSSRulesClient(),
 			ImageRules(),
 		]
 	},
 	plugins: [
 		cleanClientDirPlugin(),
 		noEmitOnErrorPlugin(),
-		miniCssExtractPlugin(),
+		extractCSSChunksPlugin(),
 		htmlPlugin(),
 		inlineSourcePlugin(),
 	],

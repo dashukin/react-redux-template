@@ -2,7 +2,7 @@
  * PostCSS loader
  */
 
-import {POSTCSS_CONFIG_ENTRY} from '../../environment';
+import { POSTCSS_CONFIG_ENTRY } from '../../environment';
 
 export const webpackPostcssLoader = () => ({
 	loader: 'postcss-loader',

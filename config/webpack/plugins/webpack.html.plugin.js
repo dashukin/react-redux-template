@@ -6,7 +6,7 @@ export const htmlPlugin = () => (
 	new HtmlWebpackPlugin({
 		filename: 'index.html',
 		template: APP_SRC_TEMPLATE_ENTRY,
-		inject: true,
+		inject: false,
 		hash: false,
 		version: packageJson.version,
 		inlineSrc: 'runtime.+js$',
