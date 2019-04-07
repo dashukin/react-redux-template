@@ -6,3 +6,4 @@ export { htmlPlugin } from './webpack.html.plugin';
 export { inlineSourcePlugin } from './webpack.inline-source.plugin';
 export { definePlugin } from './webpack.define.plugin';
 export { limitServerChunksCountPlugin } from './webpack.limit-server-chunks-count.plugin';
+export { cssoPlugin } from './webpack.csso.plugin';

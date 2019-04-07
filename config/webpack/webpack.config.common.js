@@ -9,6 +9,7 @@ import {
 	htmlPlugin,
 	inlineSourcePlugin,
 	definePlugin,
+	cssoPlugin,
 } from './plugins';
 
 import {
@@ -68,6 +69,7 @@ const config = {
 		noEmitOnErrorPlugin(),
 		extractCSSChunksPlugin(),
 		htmlPlugin(),
+		cssoPlugin(),
 		inlineSourcePlugin(),
 		definePlugin({
 			SSR: JSON.stringify(false)
