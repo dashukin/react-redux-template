@@ -12,9 +12,9 @@ import {
 } from './plugins';
 
 import {
-	JSRules,
-	CSSRulesClient,
-	ImageRules,
+	jsRules,
+	cssRulesClient,
+	imageRules,
 } from './rules';
 
 import { alias } from './resolve';
@@ -58,9 +58,9 @@ const config = {
 	},
 	module: {
 		rules: [
-			JSRules(),
-			CSSRulesClient(),
-			ImageRules(),
+			jsRules(),
+			cssRulesClient(),
+			imageRules(),
 		]
 	},
 	plugins: [

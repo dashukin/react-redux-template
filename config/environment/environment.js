@@ -26,6 +26,15 @@ export const APP_SRC_CLIENT_DIR = path.resolve(APP_SRC_DIR, './client');
 export const APP_SRC_ENTRY = path.resolve(APP_SRC_CLIENT_DIR, './index.js');
 export const APP_SRC_TEMPLATE_ENTRY = path.resolve(APP_SRC_CLIENT_DIR, './index.html');
 
+export const APP_SRC_SERVER_DIR = path.resolve(APP_SRC_DIR, './server');
+export const APP_SRC_SERVER_ENTRY = path.resolve(APP_SRC_SERVER_DIR, './index.js');
+
 export const DIST_DIR = path.resolve(ROOT_DIR, './dist');
 export const DIST_CLIENT_DIR = path.resolve(DIST_DIR, './client');
+
+export const DIST_SERVER_DIR = path.resolve(DIST_DIR, './server');
+export const DIST_CLIENT_STATIC_DIR = path.resolve(process.cwd(), './client');
+export const DIST_CLIENT_TEMPLATE = path.resolve(DIST_CLIENT_STATIC_DIR, './index.html');
+
+export const SERVER_PORT = 3000;
 

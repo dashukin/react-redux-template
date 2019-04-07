@@ -8,7 +8,7 @@ import {
 
 const STYLES_PATTERN = '\\.s?css$';
 
-export const CSSRulesClient = () => ({
+export const cssRulesClient = () => ({
 	test: new RegExp(STYLES_PATTERN),
 	use: [
 		webpackExtractCssLoader(),
@@ -18,7 +18,7 @@ export const CSSRulesClient = () => ({
 	],
 });
 
-export const CSSRulesServer = () => ({
+export const cssRulesServer = () => ({
 	test: new RegExp(STYLES_PATTERN),
 	use: [
 		webpackCSSLoader(),
@@ -26,14 +26,3 @@ export const CSSRulesServer = () => ({
 		webpackSassLoader(),
 	],
 });
-
-export default () => ({
-	test: new RegExp(STYLES_PATTERN),
-	use: [
-		webpackExtractCssLoader(),
-		webpackStyleLoader(),
-		webpackPostcssLoader(),
-		webpackSassLoader(),
-	],
-});
-
