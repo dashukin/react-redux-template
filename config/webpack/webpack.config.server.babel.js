@@ -56,7 +56,7 @@ const serverConfig = {
 		definePlugin({
 			PRODUCTION: true,
 			SSR: JSON.stringify(true)
-		})
+		}),
 	],
 	resolve: {
 		alias: alias()

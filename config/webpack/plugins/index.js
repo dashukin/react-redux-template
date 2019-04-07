@@ -7,3 +7,4 @@ export { inlineSourcePlugin } from './webpack.inline-source.plugin';
 export { definePlugin } from './webpack.define.plugin';
 export { limitServerChunksCountPlugin } from './webpack.limit-server-chunks-count.plugin';
 export { cssoPlugin } from './webpack.csso.plugin';
+export { faviconsPlugin } from './webpack.favicons.plugin';
