@@ -18,6 +18,7 @@ Ready to go react redux template with some predefined features you might need
 	```
 #### Store
 - Redux
+- Reselect
 #### Side effects
 - Redux-saga
 - Axios
@@ -53,19 +54,19 @@ Ready to go react redux template with some predefined features you might need
 │   ├── application // app specific configuration
 │   ├── environment // env specific configuration
 │   ├── postcss // postcss config configuration
-│   └── webpack // key webpack options are declared separatley
+│   └── webpack // key webpack options are declared separately
 │       ├── loaders
 │       ├── plugins
 │       ├── resolve
 │       └── rules
 ├── dist
-│   ├── client
+│   ├── client // dist client folder
 │   │   ├── css
 │   │   │   └── chunks
-│   │   ├── icons-41b280f93ccf5e8b4e4f0a8dbb69eaa1 // generated for productoion build
+│   │   ├── icons-41b280f93ccf5e8b4e4f0a8dbb69eaa1 // generated for production build
 │   │   └── js // main dist folder for js
 │   │       └── chunks // dynamic chunks
-│   └── server
+│   └── server // dist server folder
 └── src
     ├── client
     │   ├── components // common components
