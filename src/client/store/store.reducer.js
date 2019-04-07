@@ -6,6 +6,6 @@ const reducers = {
 };
 
 export const createCombinedReducers = (extraReducers) => (
-	combineReducers({ ...reducers, ...extraReducers})
+	combineReducers({ ...reducers, ...extraReducers })
 );
 
