@@ -1,120 +1,98 @@
 # react-redux-template
-Feature based approach of creating react-redux applications.
+Ready to go react redux template with some predefined features you might need
 ## Includes
-- React
+#### Rendering
+- React (16.8+)
+#### Styling
+- SCSS, PostCSS, CSSO
+#### Loaders
+- images
+	```javascript
+	import imgSource from './images/img-source.png';
+	```
+- css, scss
+	```javascript
+	import './styles/styles.css';
+	// or
+	import './styles/styles.scss';
+	```
+#### Store
 - Redux
-- Babel for ES6/7 syntax support (including class properties, generators)
-- Redux-saga for handling side effects
-- SCSS syntax support
-- Webpack for handling file and module imports
-- Gulp for managing build tasks (including webpack task too)
-- Bluebird
-
-## Proposed app structure
-- /src - application source directory
-	- /components - common components which are expected to be reused by other components.
-	- /constants - common application constants that should be used across whole project. Consists of mirrored values and key-value pairs.
-	- /data - a place for any common reducers or sagas that doesn't below directly to any component.
-	- /scenes - unique root components. Think about like pages or screens of your application.
-	- /scss - common directory for scss stylesheets. Should consist of common files with appropriate imports from scenes and common components.
-	- /services - common directory for any services used in application.
-- /build - application output directory.
-	- /js - javascript files output directory.
-	- /css - css files output directory.
-	- /images - any images being imported by components.
-	
-## Proposed component structure example
-- /ExampleComponentName - component root directory
-	- /components - child components that only belong to ExampleComponentName.
-	 	- ChildComponent - child component which follows the same structure. Child components could only be used by any parent components, but not by sibling one.
-	 	- ...
-	- /images - any images required by ExampleComponentName and loaded via require/import.
-	- _example-component-name.scss - component styles. Each parent component stylesheet should import all it's direct child components styles.
-	- presenter.js / container.js - component file itself. Depending on component role and ability to manage application state it could be a presenter or a container.
-	- index.js - default export file.
-	- reducer.js - component reducer (for container component).
-	- constants.js - component related constants to use with appropriate actions and reducer.
-	- actions.js - component actions to interact with application state (for container component).
-	- saga.js - component saga to manage asynchronous actions (for container component).
-
-Every reducer is expected to be exported as object to easily combine all nested reducers on store creation:
-```javascript
-// /src/scenes/ExampleComponent/components/ExampleChildComponent
-
-const exampleChildReducer = (state, action) => {
-	switch (action.type) {
-		default:
-			return state;
-	}	
-};
-
-const reducers = {
-	exampleChildReducer
-}
-
-export default reducers;
-
-```
-
-```javascript
-// /src/scenes/ExampleComponent
-// components path configured as alias in webpack config
-import exampleChildReducer from 'components/ExampleChild/reducer';
-
-const exampleReducer = (state, action) => {
-	switch (action.type) {
-		default:
-			return state;
-	}	
-};
-
-const reducers = {
-	...exampleChildReducer,
-	exampleReducer
-}
-
-export default reducers;
-
-```
-
-```javascript
-// /src/reducer.js - root reducer
-// scenes path configured as alias in webpack config
-import exampleReducer from 'scenes/ExampleComponent';
-
-const reducers = {
-	...exampleReducer
-}
-
-export default reducers;
-
-
-```
-
-
-```javascript
-// /src/index.js
-
-import {combineReducers, createStore} from 'redux';
-import {default as reducers} from './reducer';
-
-
-const store = createStore(combineReducers(reducers));
-// ...
-
-```
-
+#### Side effects
+- Redux-saga
+- Axios
+#### Routing
+- redux-first-router
+#### Bundler
+- Webpack (4.29+)
+#### Transpiling 
+- Babel 7
+#### Server
+- Express (4.16+)
 
 	
 ## Dev / Build tasks
-- npm run dev - default task for developing. Includes:
-	- clean build directory.
-	- create javascript output files.
-	- create css build files.
-	- add javascript/scss watchers.
-- npm run build - default task for creating production build. Includes:
-	- clean build directory.
-	- create javascript output files with "production" flag and uglify plugin.
-	- create scss files.
+- ```npm run start``` or ```yarn start``` - default task for developing. Includes:
+	- clean ```dist``` directory
+	- build app
+	- build styles
+	- watch app changes
+- ```npm run build``` or ```yarn build``` - default task for creating production build. Includes:
+	- clean ```dist``` directory
+	- build app
+	- build styles
+	- build favicons (production mode only)
+- ```npm run build:app``` or ```yarn build:app``` - build app only
+- ```npm run build:server``` or ```yarn build:server``` - build server only
 
+## App structure
+
+```bash
+.
+├── config
+│   ├── application // app specific configuration
+│   ├── environment // env specific configuration
+│   ├── postcss // postcss config configuration
+│   └── webpack // key webpack options are declared separatley
+│       ├── loaders
+│       ├── plugins
+│       ├── resolve
+│       └── rules
+├── dist
+│   ├── client
+│   │   ├── css
+│   │   │   └── chunks
+│   │   ├── icons-41b280f93ccf5e8b4e4f0a8dbb69eaa1 // generated for productoion build
+│   │   └── js // main dist folder for js
+│   │       └── chunks // dynamic chunks
+│   └── server
+└── src
+    ├── client
+    │   ├── components // common components
+    │   ├── pages // application pages
+    │   │   ├── home // example page
+    │   │   └── not-found // example page
+    │   ├── routes // routes configuration
+    │   ├── selectors // reselect selectors
+    │   │   ├── common // selectors without cross dependencies
+    │   │   └── composed // cross dependent selectors
+    │   ├── services // client specific services
+    │   ├── store
+    │   │   ├── __example // 
+    │   │   ├── _history // TBD
+    │   │   ├── _middleware // store middlewares
+    │   │   └── pages // redux-first-router pages reducer
+    │   ├── styles // common styles and helpers
+    │   │   ├── _mixins
+    │   │   ├── _variables
+    │   │   └── partials
+    │   └── utils
+    ├── common // common services to be used both for client and server sides
+    │   └── services
+    │       ├── api // basic api service
+    │       └── normalize // basic normalization service
+    └── server
+        └── favicon // favicon source
+
+```
 
