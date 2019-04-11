@@ -6,8 +6,9 @@
   "scripts": {
     "build:app": "webpack --config config/webpack/webpack.config.babel.js",
     "build:server": "webpack --config config/webpack/webpack.config.server.babel.js",
-    "start": "npm run build:app",
-    "build": "cross-env NODE_ENV=production npm run build:app",
+    "build:all": "webpack --config config/webpack/webpack.config.all.babel.js",
+    "build": "cross-env NODE_ENV=production npm run build:all",
+    "start": "npm run build:all",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint ./src",
     "lint:fix": "npx eslint ./src --fix"

@@ -1,7 +1,3 @@
-/*global
- 	module, __dirname, require
- */
-
 /**
  * @name path
  * @property resolve
@@ -13,7 +9,7 @@ import devConfig from './webpack.config.dev';
 import prodConfig from './webpack.config.prod';
 
 import {
-	DEV,
+  DEV,
 } from '../environment';
 
 const envConfig = DEV ? devConfig : prodConfig;
