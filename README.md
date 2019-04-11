@@ -101,3 +101,31 @@ Ready to go react redux template with some predefined features you might need
 
 ```
 
+## Directory structure conventions
+
+#### Application source
+- `src` - common application source directory
+- `src/client` - client source directory
+- `src/server` - server source directory
+- `src/common` - shareable source directory consumed by noth client and server sides
+
+## Files naming conventions
+
+#### Components
+- Every component directory contains `index.js` export file
+- Every dumb component has its name as `XXX.component.js`
+- Every smart component has its name as `XXX.container.js`
+
+####  Store
+- Store part directory has its name the same as name of its reducer (e.g. `xxx`)
+- Store part contains several files based on its purpose:
+	- `xxx.reducer` - store reducer
+	- `xxx.constants` - store constants
+	- `xxx.actions` - store actions
+	- `xxx.saga` - store saga
+
+#### Selectors
+- Selectors directory contains several subdirectories based on their purpose:
+	- `common` - common selectors either grouped by store reducers or stored as a flat list
+	- `composed` - cross dependent selectors to be used for calculated/composed values
+	
