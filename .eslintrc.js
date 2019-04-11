@@ -37,7 +37,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       webpack: {
-        config: './config/webpack/webpack.config.babel.js'
+        config: './config/webpack/webpack.config.client.babel.js'
       }
     }
   }

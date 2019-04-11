@@ -52,7 +52,7 @@ const config = {
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors'
+          name: 'vendors',
         },
       },
     },
@@ -62,7 +62,7 @@ const config = {
       jsRules(),
       cssRulesClient(),
       imageRules(),
-    ]
+    ],
   },
   plugins: [
     cleanClientDirPlugin(),
@@ -72,12 +72,12 @@ const config = {
     cssoPlugin(),
     inlineSourcePlugin(),
     definePlugin({
-      SSR: JSON.stringify(false)
-    })
+      SSR: JSON.stringify(false),
+    }),
   ],
   resolve: {
-    alias: alias()
-  }
+    alias: alias(),
+  },
 };
 
 export default config;

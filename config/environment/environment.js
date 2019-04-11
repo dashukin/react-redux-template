@@ -2,10 +2,6 @@
 * Environment variables
 * */
 
-/*global
-	__dirname, process
- */
-
 import path from 'path';
 
 export const DEV = process.env.NODE_ENV !== 'production';
@@ -39,4 +35,3 @@ export const DIST_CLIENT_STATIC_DIR = path.resolve(process.cwd(), './client');
 export const DIST_CLIENT_TEMPLATE = path.resolve(DIST_CLIENT_STATIC_DIR, './index.html');
 
 export const SERVER_PORT = 3000;
-

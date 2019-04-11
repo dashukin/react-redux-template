@@ -4,9 +4,9 @@
  */
 
 import merge from 'webpack-merge';
-import commonConfig from './webpack.config.common';
-import devConfig from './webpack.config.dev';
-import prodConfig from './webpack.config.prod';
+import commonConfig from './webpack.config.client.common';
+import devConfig from './webpack.config.client.dev';
+import prodConfig from './webpack.config.client.prod';
 
 import {
   DEV,

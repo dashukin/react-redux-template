@@ -1,17 +1,3 @@
-/*global
- 	module, __dirname, require
- */
-
-/**
- * @name webpack
- * @property DefinePlugin
- * @property DedupePlugin
- * @property UglifyJsPlugin
- * @property LoaderOptionsPlugin
- * @property AggressiveMergingPlugin
- * @property HotModuleReplacementPlugin
- */
-
 import {
   progressBarPlugin,
   definePlugin,
