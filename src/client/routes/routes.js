@@ -1,3 +1,3 @@
 export const routesMap = {
-	HOME: '/'
+  HOME: '/',
 };

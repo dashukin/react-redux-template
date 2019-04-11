@@ -5,28 +5,28 @@ import * as pages from './pages';
 import DefaultPage from './pages';
 
 class Application extends PureComponent {
-	getPage() {
-		const { page } = this.props;
-		const PageComponent = pages[page] || DefaultPage;
+  getPage() {
+    const { page } = this.props;
+    const PageComponent = pages[page] || DefaultPage;
 
-		return (
-			<PageComponent />
-		)
-	}
+    return (
+      <PageComponent />
+    );
+  }
 
-	render() {
-		const page = this.getPage();
+  render() {
+    const page = this.getPage();
 
-		return (
-			<div>
-				{page}
-			</div>
-		);
-	}
-};
+    return (
+      <div>
+        {page}
+      </div>
+    );
+  }
+}
 
 Application.propTypes = {
-	page: PropTypes.string.isRequired
+  page: PropTypes.string.isRequired,
 };
 
 export default Application;

@@ -9,7 +9,7 @@ const startSagas = [
 ];
 
 function* rootSaga() {
-	yield all(map(fork, startSagas));
+  yield all(map(fork, startSagas));
 }
 
 const watchSagas = [
@@ -17,7 +17,7 @@ const watchSagas = [
 ];
 
 export function* watchSaga() {
-	yield all(map(fork, watchSagas));
+  yield all(map(fork, watchSagas));
 }
 
 

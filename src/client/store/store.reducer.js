@@ -2,10 +2,9 @@ import { combineReducers } from 'redux';
 import page from 'src/client/store/pages/pages.reducer';
 
 const reducers = {
-	page,
+  page,
 };
 
-export const createCombinedReducers = (extraReducers) => (
-	combineReducers({ ...reducers, ...extraReducers })
+export const createCombinedReducers = extraReducers => (
+  combineReducers({ ...reducers, ...extraReducers })
 );
-

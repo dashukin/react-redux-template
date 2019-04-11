@@ -1,13 +1,13 @@
 import { applyMiddleware } from 'redux';
 import {
-	sagaMiddleware,
-	loggerMiddleware,
+  sagaMiddleware,
+  loggerMiddleware,
 } from './_middleware';
 
 export const createStoreMiddlewareEnhancer = (...extraMiddleware) => (
-	applyMiddleware(
-		sagaMiddleware,
-		loggerMiddleware,
-		...extraMiddleware
-	)
+  applyMiddleware(
+    sagaMiddleware,
+    loggerMiddleware,
+    ...extraMiddleware,
+  )
 );

@@ -10,50 +10,49 @@ import rootSaga, { watchSaga } from './store.saga';
 
 const reduxDevtoolsCompose = get(window, '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__');
 
-export const createAppStore = ({ preloadTasks = [], isSSR = false } = {}) => initialState => {
-	const isBrowser = typeof window === 'object';
-	const devToolsAvailable = isBrowser && (typeof reduxDevtoolsCompose === 'function');
-	const composer = devToolsAvailable ? reduxDevtoolsCompose : compose;
+export const createAppStore = ({ preloadTasks = [], isSSR = false } = {}) => (initialState) => {
+  const isBrowser = typeof window === 'object';
+  const devToolsAvailable = isBrowser && (typeof reduxDevtoolsCompose === 'function');
+  const composer = devToolsAvailable ? reduxDevtoolsCompose : compose;
 
-	const { reducer, middleware, enhancer } = connectRoutes(routesMap);
-	const storeMidlewareEnhancer = createStoreMiddlewareEnhancer(middleware);
+  const { reducer, middleware, enhancer } = connectRoutes(routesMap);
+  const storeMidlewareEnhancer = createStoreMiddlewareEnhancer(middleware);
 
-	const combinedReducers = createCombinedReducers({
-		location: reducer
-	});
+  const combinedReducers = createCombinedReducers({
+    location: reducer,
+  });
 
-	const storeEnhancers = composer(enhancer, storeMidlewareEnhancer);
+  const storeEnhancers = composer(enhancer, storeMidlewareEnhancer);
 
-	return new Promise((resolve, reject) => {
-		const store = createStore(
-			combinedReducers,
-			initialState,
-			storeEnhancers
-		);
+  return new Promise((resolve, reject) => {
+    const store = createStore(
+      combinedReducers,
+      initialState,
+      storeEnhancers,
+    );
 
-		// temporary debug
-		if (!PRODUCTION && isBrowser) {
-			window.store = store;
-		}
+    // temporary debug
+    if (!PRODUCTION && isBrowser) {
+      window.store = store;
+    }
 
-		const mainTaskPromise = runSaga(rootSaga).done;
-		const preloadTasksPromises = preloadTasks.map(task => task(store.dispatch));
+    const mainTaskPromise = runSaga(rootSaga).done;
+    const preloadTasksPromises = preloadTasks.map(task => task(store.dispatch));
 
-		const allPromises = [mainTaskPromise, ...preloadTasksPromises];
+    const allPromises = [mainTaskPromise, ...preloadTasksPromises];
 
-		// terminate all forked tasks to make promises be resolved
-		store.dispatch(END);
+    // terminate all forked tasks to make promises be resolved
+    store.dispatch(END);
 
-		Promise.all(allPromises)
-			.then(() => {
-				// Once all pending promises are resolved - reapply watchers for client side
-				if (!isSSR) {
-					runSaga(watchSaga);
-				}
-				resolve(store);
-			}).catch(error => {
-			reject(error);
-		});
-	});
+    Promise.all(allPromises)
+      .then(() => {
+        // Once all pending promises are resolved - reapply watchers for client side
+        if (!isSSR) {
+          runSaga(watchSaga);
+        }
+        resolve(store);
+      }).catch((error) => {
+        reject(error);
+      });
+  });
 };
-

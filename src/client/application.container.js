@@ -3,7 +3,7 @@ import Application from './application.component';
 
 // grab page type
 const mapStateToProps = ({ page }) => ({
-	page
+  page,
 });
 
 export default connect(mapStateToProps)(Application);
