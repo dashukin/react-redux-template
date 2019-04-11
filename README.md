@@ -36,19 +36,21 @@ Ready to go react redux template with some predefined features you might need
 - Husky
 
 	
-## Dev / Build tasks
-- ```npm run start``` or ```yarn start``` - default task for developing. Includes:
-	- clean ```dist``` directory
+## Tasks
+- `npm run start` or `yarn start` - default task for developing. Includes:
+	- clean `dist` directory
 	- build app
 	- build styles
 	- watch app changes
-- ```npm run build``` or ```yarn build``` - default task for creating production build. Includes:
-	- clean ```dist``` directory
+- `npm run build` or `yarn build` - default task for creating production build. Includes:
+	- clean `dist` directory
 	- build app
 	- build styles
 	- build favicons (production mode only)
-- ```npm run build:app``` or ```yarn build:app``` - build app only
-- ```npm run build:server``` or ```yarn build:server``` - build server only
+- `npm run build:app` or `yarn build:app` - build app only
+- `npm run build:server` or `yarn build:server` - build server only
+- `npm run lint` - run eslint
+- `npm run lint:fix` - run eslint with `--fix`
 
 ## App structure
 
@@ -128,4 +130,3 @@ Ready to go react redux template with some predefined features you might need
 - Selectors directory contains several subdirectories based on their purpose:
 	- `common` - common selectors either grouped by store reducers or stored as a flat list
 	- `composed` - cross dependent selectors to be used for calculated/composed values
-	
