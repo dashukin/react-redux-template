@@ -9,8 +9,8 @@
     "start": "npm run build:app",
     "build": "cross-env NODE_ENV=production npm run build:app",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/eslint ./src",
-    "lint-fix": "echo \"eslint fix should be executed\""
+    "lint": "npx eslint ./src",
+    "lint:fix": "npx eslint ./src --fix"
   },
   "repository": "git+https://github.com/dashukin/react-redux-template.git",
   "keywords": [
@@ -29,7 +29,7 @@
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.12.4",
     "husky": "^1.3.1",
