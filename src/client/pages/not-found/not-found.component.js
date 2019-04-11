@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 class NotFoundPage extends PureComponent {
 	render() {
@@ -9,5 +10,9 @@ class NotFoundPage extends PureComponent {
 		);
 	}
 }
+
+NotFoundPage.propTypes = {
+	// define any required
+};
 
 export default NotFoundPage;
