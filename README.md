@@ -30,6 +30,8 @@ Ready to go react redux template with some predefined features you might need
 - Babel 7
 #### Server
 - Express (4.16+)
+#### Code style
+- ESLint airbnb
 
 	
 ## Dev / Build tasks
