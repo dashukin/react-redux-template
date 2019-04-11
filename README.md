@@ -32,6 +32,8 @@ Ready to go react redux template with some predefined features you might need
 - Express (4.16+)
 #### Code style
 - ESLint airbnb
+#### Hooks
+- Husky
 
 	
 ## Dev / Build tasks
