@@ -9,6 +9,7 @@ module.exports = {
           browsers: [
             'last 2 versions', 'safari >= 7',
           ],
+          node: 'current',
         },
       },
     ],
@@ -17,5 +18,6 @@ module.exports = {
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-proposal-object-rest-spread',
+    '@babel/plugin-transform-regenerator',
   ],
 };

@@ -3,10 +3,11 @@
 * */
 
 import ApiService from 'src/common/services/api';
-import { normalizeData } from 'src/common/services/normalize';
+import { normalizeExampleData } from 'src/common/services/normalize';
 import {
-  takeLatest, call, put,
+  takeLatest, all, call, put, fork,
 } from 'redux-saga/effects';
+import map from 'lodash/fp/map';
 import exampleConstants from './example.constants';
 import {
   fetchExampleSuccess,
@@ -17,10 +18,10 @@ const {
   EXAMPLE_FETCH,
 } = exampleConstants;
 
-function* fetchExampleData() {
+export function* fetchExampleData() {
   try {
     const response = yield call(ApiService.fetchData);
-    const normalizedData = normalizeData(response.data);
+    const normalizedData = normalizeExampleData(response.data);
 
     yield put(fetchExampleSuccess(normalizedData));
   } catch (error) {
@@ -28,10 +29,27 @@ function* fetchExampleData() {
   }
 }
 
-function* watchFetchExampleData() {
+export function* watchFetchExampleData() {
   yield takeLatest(EXAMPLE_FETCH, fetchExampleData);
 }
 
+export const watchers = [
+  watchFetchExampleData,
+  fetchExampleData,
+];
+
 export function* watchExample() {
-  yield watchFetchExampleData();
+  yield all(map(fork, watchers));
+}
+
+export function* checkSession() {
+  try {
+    yield call(fetchUserSession);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export function* fetchUserSession() {
+  yield console.log('fetchUserSession called');
 }

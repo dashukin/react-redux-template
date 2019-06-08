@@ -59,3 +59,5 @@ class Api {
     return this.request(url, DELETE, params, body, headers);
   }
 }
+
+export default Api;

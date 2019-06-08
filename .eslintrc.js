@@ -12,7 +12,12 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
     PRODUCTION: 'readonly',
-    SSR: 'readonly'
+    SSR: 'readonly',
+    jest: 'readonly',
+    describe: 'readonly',
+    beforeEach: 'readonly',
+    it: 'readonly',
+    expect: 'readonly',
   },
   parserOptions: {
     ecmaFeatures: {
@@ -32,7 +37,8 @@ module.exports = {
     'eact/jsx-filename-extension': 'off',
     'no-underscore-dangle': 'off',
     'react/jsx-filename-extension': 'off',
-    'react/prefer-stateless-function': 'off'
+    'react/prefer-stateless-function': 'off',
+    'no-use-before-define': 'off',
   },
   settings: {
     'import/resolver': {
