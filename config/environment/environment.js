@@ -31,7 +31,7 @@ export const DIST_DIR = path.resolve(ROOT_DIR, './dist');
 export const DIST_CLIENT_DIR = path.resolve(DIST_DIR, './client');
 
 export const DIST_SERVER_DIR = path.resolve(DIST_DIR, './server');
-export const DIST_CLIENT_STATIC_DIR = path.resolve(process.cwd(), './client');
+export const DIST_CLIENT_STATIC_DIR = path.resolve(process.cwd(), './dist/client');
 export const DIST_CLIENT_TEMPLATE = path.resolve(DIST_CLIENT_STATIC_DIR, './index.html');
 
 export const SERVER_PORT = 3000;
