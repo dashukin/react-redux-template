@@ -2,6 +2,7 @@ import fse from 'fs-extra';
 import express, { Router } from 'express';
 import helmet from 'helmet';
 import serveStatic from 'serve-static';
+import Logger from 'src/common/utils/logger';
 
 import {
   DIST_CLIENT_STATIC_DIR,
@@ -9,16 +10,15 @@ import {
   SERVER_PORT,
 } from 'config/environment';
 
-const logger = (msg) => {
-  // eslint-disable-next-line no-console
-  console.log(msg);
-};
+const logger = new Logger({
+  name: 'Server',
+});
 
 export const startServer = () => {
-  logger('Starting express server...');
+  logger.info('Starting express server...');
   const server = express();
 
-  logger('Using static dir:', DIST_CLIENT_STATIC_DIR);
+  logger.info('Using static dir:', DIST_CLIENT_STATIC_DIR);
   const staticMiddleware = serveStatic(DIST_CLIENT_STATIC_DIR, {
     index: false,
   });
@@ -34,11 +34,11 @@ export const startServer = () => {
         res.send(html);
       })
       .catch((err) => {
-        logger(err.message);
+        logger.error(err.message);
       });
   });
 
   server.listen(SERVER_PORT);
 
-  logger(`Express server started on port ${SERVER_PORT}`);
+  logger.info(`Express server started on port ${SERVER_PORT}`);
 };
