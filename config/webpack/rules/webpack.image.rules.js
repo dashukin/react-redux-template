@@ -5,8 +5,8 @@
 import { webpackImageLoader } from '../loaders';
 
 export default () => ({
-	test: /\.(png|jpg|gif)$/,
-	use: [
-		webpackImageLoader(),
-	],
+  test: /\.(png|jpg|gif|svg)$/,
+  use: [
+    webpackImageLoader(),
+  ],
 });

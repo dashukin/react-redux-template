@@ -2,6 +2,7 @@ import {
   jsRules,
   cssRulesServer,
   imageRules,
+  propertiesRules,
 } from './rules';
 import {
   noEmitOnErrorPlugin,
@@ -36,6 +37,7 @@ const serverConfig = {
       jsRules(),
       cssRulesServer(),
       imageRules(),
+      propertiesRules(),
     ],
   },
   plugins: [

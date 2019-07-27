@@ -5,9 +5,9 @@
 import { webpackBabelLoader } from '../loaders';
 
 export default () => ({
-	test: /\.js$/,
-	exclude: /node_modules/,
-	use: [
-		webpackBabelLoader,
-	]
+  test: /\.js$/,
+  exclude: /node_modules/,
+  use: [
+    webpackBabelLoader,
+  ],
 });

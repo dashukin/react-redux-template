@@ -16,6 +16,7 @@ import {
   jsRules,
   cssRulesClient,
   imageRules,
+  propertiesRules,
 } from './rules';
 
 import { alias } from './resolve';
@@ -62,6 +63,7 @@ const config = {
       jsRules(),
       cssRulesClient(),
       imageRules(),
+      propertiesRules(),
     ],
   },
   plugins: [
