@@ -9,11 +9,16 @@ import {
   SERVER_PORT,
 } from 'config/environment';
 
+const logger = (msg) => {
+  // eslint-disable-next-line no-console
+  console.log(msg);
+};
+
 export const startServer = () => {
-  console.log('Starting express server...');
+  logger('Starting express server...');
   const server = express();
 
-  console.log('Using static dir:', DIST_CLIENT_STATIC_DIR);
+  logger('Using static dir:', DIST_CLIENT_STATIC_DIR);
   const staticMiddleware = serveStatic(DIST_CLIENT_STATIC_DIR, {
     index: false,
   });
@@ -29,11 +34,11 @@ export const startServer = () => {
         res.send(html);
       })
       .catch((err) => {
-        console.log(err.message);
+        logger(err.message);
       });
   });
 
   server.listen(SERVER_PORT);
 
-  console.log(`Express server started on port ${SERVER_PORT}`);
+  logger(`Express server started on port ${SERVER_PORT}`);
 };
