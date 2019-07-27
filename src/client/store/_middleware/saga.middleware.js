@@ -1,11 +1,11 @@
 /**
- * Saga _middleware
+ * Saga middleware
  */
 
-import createSagaMiddleware from 'redux-saga';
+import createSagaMiddleWare from 'redux-saga';
 
-export const sagaMiddleware = createSagaMiddleware();
-
-export const runSaga = saga => (
-  sagaMiddleware.run(saga)
-);
+export const getSagaMiddleware = ({ services }) => createSagaMiddleWare({
+  context: {
+    services,
+  },
+});

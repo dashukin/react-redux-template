@@ -2,10 +2,9 @@
 * Saga
 * */
 
-import ApiService from 'src/common/services/api';
 import { normalizeExampleData } from 'src/common/services/normalize';
 import {
-  takeLatest, all, call, put, fork,
+  takeLatest, all, call, put, fork, getContext,
 } from 'redux-saga/effects';
 import map from 'lodash/fp/map';
 import exampleConstants from './example.constants';
@@ -20,7 +19,9 @@ const {
 
 export function* fetchExampleData() {
   try {
-    const response = yield call(ApiService.fetchData);
+    const services = yield getContext('services');
+    const { exampleApiService } = services;
+    const response = yield call(exampleApiService.fetchExampleData);
     const normalizedData = normalizeExampleData(response.data);
 
     yield put(fetchExampleSuccess(normalizedData));
@@ -40,16 +41,4 @@ export const watchers = [
 
 export function* watchExample() {
   yield all(map(fork, watchers));
-}
-
-export function* checkSession() {
-  try {
-    yield call(fetchUserSession);
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-export function* fetchUserSession() {
-  yield console.log('fetchUserSession called');
 }

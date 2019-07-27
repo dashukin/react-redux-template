@@ -3,15 +3,15 @@
 * */
 import { fork, all } from 'redux-saga/effects';
 import map from 'lodash/fp/map';
-import { watchExample } from './__example/example.saga';
+import { initI18n, watchI18n } from 'src/client/store/i18n/i18n.saga';
+import { watchExample } from 'src/client/store/__example/example.saga';
 
-const startSagas = [];
-
-function* rootSaga() {
-  yield all(map(fork, startSagas));
-}
+const startSagas = [
+  initI18n,
+];
 
 const watchSagas = [
+  watchI18n,
   watchExample,
 ];
 
@@ -20,4 +20,6 @@ export function* watchSaga() {
 }
 
 
-export default rootSaga;
+export default function* rootSaga() {
+  yield all(map(fork, startSagas));
+}

@@ -5,18 +5,20 @@ import get from 'lodash/get';
 import { routesMap } from '../routes';
 import { createCombinedReducers } from './store.reducer';
 import { createStoreMiddlewareEnhancer } from './store.middleware';
-import { runSaga } from './_middleware/saga.middleware';
+import { getSagaMiddleware } from './_middleware/saga.middleware';
 import rootSaga, { watchSaga } from './store.saga';
 
 const reduxDevtoolsCompose = get(window, '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__');
 
-export const createAppStore = ({ preloadTasks = [], isSSR = false } = {}) => (initialState) => {
+export const createAppStore = (options = {}) => (initialState) => {
+  const { preloadTasks = [], isSSR = false, services } = options;
   const isBrowser = typeof window === 'object';
   const devToolsAvailable = isBrowser && (typeof reduxDevtoolsCompose === 'function');
   const composer = devToolsAvailable ? reduxDevtoolsCompose : compose;
 
+  const sagaMiddleware = getSagaMiddleware({ services });
   const { reducer, middleware, enhancer } = connectRoutes(routesMap);
-  const storeMidlewareEnhancer = createStoreMiddlewareEnhancer(middleware);
+  const storeMidlewareEnhancer = createStoreMiddlewareEnhancer(middleware, sagaMiddleware);
 
   const combinedReducers = createCombinedReducers({
     location: reducer,
@@ -36,7 +38,7 @@ export const createAppStore = ({ preloadTasks = [], isSSR = false } = {}) => (in
       window.store = store;
     }
 
-    const mainTaskPromise = runSaga(rootSaga).done;
+    const mainTaskPromise = sagaMiddleware.run(rootSaga).toPromise();
     const preloadTasksPromises = preloadTasks.map(task => task(store.dispatch));
 
     const allPromises = [mainTaskPromise, ...preloadTasksPromises];
@@ -48,7 +50,7 @@ export const createAppStore = ({ preloadTasks = [], isSSR = false } = {}) => (in
       .then(() => {
         // Once all pending promises are resolved - reapply watchers for client side
         if (!isSSR) {
-          runSaga(watchSaga);
+          sagaMiddleware.run(watchSaga);
         }
         resolve(store);
       }).catch((error) => {
