@@ -18,7 +18,9 @@ module.exports = {
     beforeEach: 'readonly',
     it: 'readonly',
     expect: 'readonly',
+    process: 'readonly',
   },
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -28,6 +30,7 @@ module.exports = {
   },
   plugins: [
     'react',
+    'babel',
   ],
   rules: {
     'class-methods-use-this': 'off',
