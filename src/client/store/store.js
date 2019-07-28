@@ -10,23 +10,37 @@ import rootSaga, { watchSaga } from './store.saga';
 
 const reduxDevtoolsCompose = get(window, '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__');
 
-export const createAppStore = (options = {}) => (initialState) => {
-  const { preloadTasks = [], isSSR = false, services } = options;
-  const isBrowser = typeof window === 'object';
-  const devToolsAvailable = isBrowser && (typeof reduxDevtoolsCompose === 'function');
-  const composer = devToolsAvailable ? reduxDevtoolsCompose : compose;
+/**
+ *
+ * @param options
+ * @param {Array} options.preloadTasks - preload tasks
+ * @param {Object} options.services
+ * @param {Boolean} options.isSSR
+ * @param {Object} options.initialState - initial applciation state
+ * @return {function(*=): Promise<any>}
+ */
+export const createAppStore = async (options = {}) => {
+  try {
+    const {
+      preloadTasks = [],
+      isSSR = false,
+      services,
+      initialState,
+    } = options;
+    const isBrowser = typeof window === 'object';
+    const devToolsAvailable = isBrowser && (typeof reduxDevtoolsCompose === 'function');
+    const composer = devToolsAvailable ? reduxDevtoolsCompose : compose;
 
-  const sagaMiddleware = getSagaMiddleware({ services });
-  const { reducer, middleware, enhancer } = connectRoutes(routesMap);
-  const storeMidlewareEnhancer = createStoreMiddlewareEnhancer(middleware, sagaMiddleware);
+    const sagaMiddleware = getSagaMiddleware({ services });
+    const { reducer, middleware, enhancer } = connectRoutes(routesMap);
+    const storeMidlewareEnhancer = createStoreMiddlewareEnhancer(middleware, sagaMiddleware);
 
-  const combinedReducers = createCombinedReducers({
-    location: reducer,
-  });
+    const combinedReducers = createCombinedReducers({
+      location: reducer,
+    });
 
-  const storeEnhancers = composer(enhancer, storeMidlewareEnhancer);
+    const storeEnhancers = composer(enhancer, storeMidlewareEnhancer);
 
-  return new Promise((resolve, reject) => {
     const store = createStore(
       combinedReducers,
       initialState,
@@ -41,20 +55,18 @@ export const createAppStore = (options = {}) => (initialState) => {
     const mainTaskPromise = sagaMiddleware.run(rootSaga).toPromise();
     const preloadTasksPromises = preloadTasks.map(task => task(store.dispatch));
 
-    const allPromises = [mainTaskPromise, ...preloadTasksPromises];
-
     // terminate all forked tasks to make promises be resolved
     store.dispatch(END);
 
-    Promise.all(allPromises)
-      .then(() => {
-        // Once all pending promises are resolved - reapply watchers for client side
-        if (!isSSR) {
-          sagaMiddleware.run(watchSaga);
-        }
-        resolve(store);
-      }).catch((error) => {
-        reject(error);
-      });
-  });
+    await Promise.all([mainTaskPromise, ...preloadTasksPromises]);
+
+    // Once all pending promises are resolved - reapply watchers for client side
+    if (!isSSR) {
+      sagaMiddleware.run(watchSaga);
+    }
+
+    return store;
+  } catch (err) {
+    throw err;
+  }
 };

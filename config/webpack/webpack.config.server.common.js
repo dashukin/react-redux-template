@@ -48,6 +48,7 @@ const serverConfig = {
     definePlugin({
       PRODUCTION: true,
       SSR: JSON.stringify(true),
+      window: JSON.stringify(undefined),
     }),
   ],
   resolve: {

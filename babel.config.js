@@ -1,3 +1,8 @@
+const BABELRC_ROOTS = [
+  '.',
+  'src/*',
+];
+
 module.exports = {
   presets: [
     '@babel/preset-react',
@@ -20,4 +25,21 @@ module.exports = {
     '@babel/plugin-proposal-object-rest-spread',
     '@babel/plugin-transform-regenerator',
   ],
+  env: {
+    production: {
+      plugins: [
+        '@babel/runtime',
+      ],
+      babelrcRoots: BABELRC_ROOTS,
+    },
+    development: {
+      plugins: [
+        '@babel/plugin-transform-runtime',
+      ],
+      babelrcRoots: BABELRC_ROOTS,
+    },
+    test: {
+
+    },
+  },
 };

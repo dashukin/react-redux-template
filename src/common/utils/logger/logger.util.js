@@ -2,6 +2,17 @@ import pino from 'pino';
 import isString from 'lodash/isString';
 
 /**
+ * @typedef {Object} LoggerInstance
+ *
+ * @property {Function} trace
+ * @property {Function} debug
+ * @property {Function} info
+ * @property {Function} warn
+ * @property {Function} error
+ * @property {Function} fatal
+ */
+
+/**
  * @typedef {Object} PinoOptions
  *
  * @param {String} name - logger name
@@ -14,7 +25,7 @@ class Logger {
    * @param {Object} options
    */
   constructor(options = {}) {
-    const pinoProps = this.transformToPinoProps(options);
+    const pinoProps = Logger.transformToPinoProps(options);
     this._logger = pino(pinoProps);
   }
 
@@ -25,7 +36,7 @@ class Logger {
    *
    * @return {PinoOptions} - pino options
    */
-  transformToPinoProps(options = {}) {
+  static transformToPinoProps(options = {}) {
     const trasnformedOptions = {};
     trasnformedOptions.name = isString(options.name) && options.name.length
       ? options.name

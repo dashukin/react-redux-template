@@ -8,24 +8,30 @@ import { createServices } from '../common/services';
 
 import Root from './root.component';
 
-export const startApplication = () => {
+export const createApp = ({ store, services }) => {
+  const app = (
+    <Root
+      store={store}
+      services={services}
+    />
+  );
+
+  return app;
+};
+
+export const startApplication = async () => {
   const preloadedState = get(window, '__PRELOADED_STATE__', {});
   const services = createServices({
     location: window.location,
     cookie: document.cookie,
   });
 
-  createAppStore({ services })(preloadedState)
-    .then((store) => {
-      const root = (
-        <Root
-          store={store}
-          services={services}
-        />
-      );
+  const appStore = await createAppStore({ services, initialState: preloadedState });
+  const app = createApp({ store: appStore, services });
 
-      hydrate(root, document.getElementById(ROOT_ELEMENT_ID));
-    });
+  hydrate(app, document.getElementById(ROOT_ELEMENT_ID));
 };
 
-startApplication();
+if (typeof window !== 'undefined') {
+  startApplication();
+}
