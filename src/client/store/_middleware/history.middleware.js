@@ -3,6 +3,5 @@
 * */
 
 import { routerMiddleware } from 'react-router-redux';
-import history from '../_history';
 
-export const historyMiddleware = routerMiddleware(history);
+export const createHistoryRouterMiddleware = history => routerMiddleware(history);

@@ -10,6 +10,7 @@ import {
   inlineSourcePlugin,
   definePlugin,
   cssoPlugin,
+  statsWriterPlugin,
 } from './plugins';
 
 import {
@@ -37,7 +38,7 @@ const config = {
     path: DIST_CLIENT_DIR,
     filename: 'js/[name].[hash].js',
     chunkFilename: 'js/chunks/[name].[chunkhash].js',
-    publicPath: './',
+    publicPath: '/',
     hotUpdateMainFilename: 'hot/[hash].hot-update.json',
     hotUpdateChunkFilename: 'hot/[id].[hash].hot-update.js',
   },
@@ -76,10 +77,12 @@ const config = {
     definePlugin({
       SSR: JSON.stringify(false),
     }),
+    statsWriterPlugin(),
   ],
   resolve: {
     alias: alias(),
   },
+  stats: 'verbose',
 };
 
 export default config;

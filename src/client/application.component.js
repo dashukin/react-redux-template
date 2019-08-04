@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import * as pages from './pages';
 import DefaultPage from './pages';
 
+import './application.scss';
+
 class Application extends PureComponent {
   getPage() {
     const { page } = this.props;

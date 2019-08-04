@@ -5,7 +5,7 @@
 import webpack from 'webpack';
 
 export const limitServerChunksCountPlugin = () => (
-	new webpack.optimize.LimitChunkCountPlugin({
-		maxChunks: 1,
-	})
+  new webpack.optimize.LimitChunkCountPlugin({
+    maxChunks: 1,
+  })
 );

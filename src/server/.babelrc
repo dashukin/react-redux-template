@@ -1,3 +1,11 @@
 {
-
+  "plugins": [
+    [
+      // https://github.com/faceyspacey/babel-plugin-universal-import
+      "universal-import",
+      {
+        "babelServer": true
+      }
+    ]
+  ]
 }

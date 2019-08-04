@@ -4,6 +4,7 @@ import serveStatic from 'serve-static';
 import Logger from 'src/common/utils/logger';
 import {
   DIST_CLIENT_STATIC_DIR,
+  DIST_WEBPACK_STATS_FILE_SRC,
   SERVER_PORT,
 } from 'config/environment';
 
@@ -40,8 +41,9 @@ export const startServer = () => {
 
   server.get(/.*/, renderMiddleware({
     createApp,
-    createStore: createAppStore,
+    createAppStore,
     logger,
+    webpackStatsSrc: DIST_WEBPACK_STATS_FILE_SRC,
   }));
 
   server.use(errorMiddleware({

@@ -15,8 +15,8 @@ const reduxDevtoolsCompose = get(window, '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__')
  * @param options
  * @param {Array} options.preloadTasks - preload tasks
  * @param {Object} options.services
- * @param {Boolean} options.isSSR
- * @param {Object} options.initialState - initial applciation state
+ * @param {Boolean} [options.isSSR]
+ * @param {Object} [options.initialState] - initial applciation state
  * @return {function(*=): Promise<any>}
  */
 export const createAppStore = async (options = {}) => {
@@ -67,6 +67,7 @@ export const createAppStore = async (options = {}) => {
 
     return store;
   } catch (err) {
+    console.error(err);
     throw err;
   }
 };

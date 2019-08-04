@@ -7,8 +7,12 @@ import { createBrowserHistory, createMemoryHistory } from 'history';
 
 const historyConfig = {
   baseName: '',
-  forceRefresh: false, // set to true when page reload is required
+  forceRefresh: false,
 };
+
+export const createClientHistory = () => createBrowserHistory(historyConfig);
+
+export const createServerHistory = () => createMemoryHistory(historyConfig);
 
 const history = !SSR ? createBrowserHistory(historyConfig) : createMemoryHistory(historyConfig);
 

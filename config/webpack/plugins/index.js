@@ -8,3 +8,4 @@ export { definePlugin } from './webpack.define.plugin';
 export { limitServerChunksCountPlugin } from './webpack.limit-server-chunks-count.plugin';
 export { cssoPlugin } from './webpack.csso.plugin';
 export { faviconsPlugin } from './webpack.favicons.plugin';
+export { statsWriterPlugin } from './webpack.stats-writer.plugin';
