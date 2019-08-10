@@ -5,6 +5,9 @@ import ReactDOMServer from 'react-dom/server';
 import { ReportChunks } from 'react-universal-component';
 import flushChunks from 'webpack-flush-chunks';
 import isError from 'lodash/isError';
+import map from 'lodash/map';
+import reduce from 'lodash/reduce';
+import isString from 'lodash/isString';
 
 /**
  * Get rendering template
@@ -37,22 +40,144 @@ const getWebpackStats = async (options) => {
 
 
 /**
+ * @param {Object} options
+ * @param {String} name
+ * @param {Object} attributes
+ * @param {String} content
+ * @param {Booleann} selfClosing
+ */
+export const createTag = (options) => {
+  const {
+    name,
+    attributes,
+    content,
+    selfClosing = false,
+  } = options;
+
+  const tagContent = isString(content) && content.length
+    ? content
+    : '';
+
+  const tagAttributes = reduce(attributes, (acc, value, key) => {
+    const attrPair = value === true
+      ? key
+      : `${key}=${value}`;
+
+    acc.push(attrPair);
+
+    return acc;
+  }, []).join(' ');
+
+  const tagOutput = selfClosing
+    ? `<${name} ${tagAttributes} />`
+    : `<${name} ${tagAttributes}>${tagContent}</${name}>`;
+
+  return tagOutput;
+};
+
+const createScriptTag = options => createTag({
+  ...options,
+  name: 'script',
+  attributes: {
+    ...options.attributes,
+    type: 'text/javascript',
+    defer: true,
+  },
+});
+
+const createStyleTag = options => createTag({
+  ...options,
+  name: 'style',
+  attributes: {
+    ...options.attributes,
+    type: 'text/css',
+  },
+});
+
+const createPreloadedStateTag = options => createTag({
+  ...options,
+  name: 'script',
+  atributes: {
+    ...options.attributes,
+    type: 'text/javascript',
+  },
+  content: `window.__PRELOADED_STATE__ = ${options.content};`,
+});
+
+
+/**
+ * Exctract js/css assets including dynamic chunks
+ *
+ *
+ * @param options
+ * @param {String[]} options.chunkNames - main rendered chunk names to take care of
+ * @param {Object} options.webpackStats - webpack stats
+ * @param {String[]} options.before
+ * @param {String[]} options.after
+ */
+const extractChunks = (options) => {
+  const {
+    chunkNames,
+    webpackStats,
+    before,
+    after,
+  } = options;
+
+  const flushedChunksData = flushChunks(webpackStats, {
+    chunkNames,
+    before,
+    after,
+  });
+
+  const {
+    scripts: scriptsList,
+    stylesheets: stylesheetsList,
+  } = flushedChunksData;
+
+  const scripts = map(scriptsList, scriptSrc => createScriptTag({
+    attributes: {
+      src: scriptSrc,
+    },
+  })).join('\n');
+
+  const styles = map(stylesheetsList, styleSrc => createStyleTag({
+    attributes: {
+      href: styleSrc,
+    },
+  })).join('\n');
+
+  const output = {
+    scripts,
+    styles,
+  };
+
+  return output;
+};
+
+
+/**
  * Process template with data to be rendered
  *
  * @param {Object} options
  * @param {String} tpl - template string
  * @param {String} app - stringified application
+ * @param {String} scripts
+ * @param {String} styles
  */
 const processTemplate = (options) => {
   const {
     tpl,
     app,
     state,
+    scripts,
+    styles,
   } = options;
 
   const processedTemplate = tpl
     .replace(/<!--TEMPLATE_APP-->/, app)
-    .replace(/<!--TEMPLATE_APP_STATE-->/, state);
+    .replace(/<!--TEMPLATE_APP_STATE-->/, state)
+    .replace(/<!--TEMPLATE_APP_SCRIPTS-->/, scripts)
+    .replace(/<!--TEMPLATE_APP_STYLES-->/, styles);
 
   return processedTemplate;
 };
@@ -122,20 +247,24 @@ const renderMiddleware = options => async (req, res, next) => {
 
   logger.info('renderedChunkNames', renderedChunkNames);
 
-  const flushedChunksData = flushChunks(webpackStats, {
+  const { scripts, styles } = extractChunks({
     chunkNames: renderedChunkNames,
-    // list of cache groups to be included before dynamic chanks are executed
+    webpackStats,
     before: ['vendors'],
     after: ['main'],
   });
 
-  logger.info('flushedChunksData', flushedChunksData);
+  const appState = createPreloadedStateTag({
+    content: stringifyState(store.getState()),
+  });
 
   // Replace template placeholders with appropriate data
   const responseBody = processTemplate({
     tpl: template,
     app: stringifiedApp,
-    state: stringifyState(store.getState()),
+    state: appState,
+    scripts,
+    styles,
   });
 
   res.setHeader('Content-Type', 'text/html');
