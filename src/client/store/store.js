@@ -22,7 +22,6 @@ const reduxDevtoolsCompose = get(window, '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__')
 export const createAppStore = async (options = {}) => {
   try {
     const {
-      preloadTasks = [],
       isSSR = false,
       services,
       initialState,
@@ -32,7 +31,12 @@ export const createAppStore = async (options = {}) => {
     const composer = devToolsAvailable ? reduxDevtoolsCompose : compose;
 
     const sagaMiddleware = getSagaMiddleware({ services });
-    const { reducer, middleware, enhancer } = connectRoutes(routesMap);
+    const {
+      reducer,
+      middleware,
+      enhancer,
+      thunk: taskRunner,
+    } = connectRoutes(routesMap);
     const storeMidlewareEnhancer = createStoreMiddlewareEnhancer(middleware, sagaMiddleware);
 
     const combinedReducers = createCombinedReducers({
@@ -47,18 +51,15 @@ export const createAppStore = async (options = {}) => {
       storeEnhancers,
     );
 
-    // temporary debug
-    if (!PRODUCTION && isBrowser) {
-      window.store = store;
-    }
-
     const mainTaskPromise = sagaMiddleware.run(rootSaga).toPromise();
-    const preloadTasksPromises = preloadTasks.map(task => task(store.dispatch));
+
+    const routeTasksPromise = taskRunner(store);
+
+    await Promise.all([mainTaskPromise, routeTasksPromise]);
 
     // terminate all forked tasks to make promises be resolved
+    // this might be sagas listening for some specific actions coming from route components.
     store.dispatch(END);
-
-    await Promise.all([mainTaskPromise, ...preloadTasksPromises]);
 
     // Once all pending promises are resolved - reapply watchers for client side
     if (!isSSR) {
