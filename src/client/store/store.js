@@ -6,7 +6,7 @@ import { routesMap } from '../routes';
 import { createCombinedReducers } from './store.reducer';
 import { createStoreMiddlewareEnhancer } from './store.middleware';
 import { getSagaMiddleware } from './_middleware/saga.middleware';
-import rootSaga, { watchSaga } from './store.saga';
+import { rootSaga, watchSaga } from './store.saga';
 
 const reduxDevtoolsCompose = get(window, '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__');
 

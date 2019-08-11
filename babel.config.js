@@ -41,7 +41,9 @@ module.exports = {
       babelrcRoots: BABELRC_ROOTS,
     },
     test: {
-
+      plugins: [
+        'dynamic-import-node',
+      ],
     },
   },
 };
