@@ -3,6 +3,7 @@ import {
   cssRulesServer,
   imageRules,
   propertiesRules,
+  inlineScriptsRules,
 } from './rules';
 import {
   noEmitOnErrorPlugin,
@@ -38,6 +39,7 @@ const serverConfig = {
       cssRulesServer(),
       imageRules(),
       propertiesRules(),
+      inlineScriptsRules(),
     ],
   },
   plugins: [

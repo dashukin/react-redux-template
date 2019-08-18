@@ -1,6 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Raw file content.
+ * @see webpack configuration
+ */
+import inlineScripts from 'src/client/inline-scripts/compiled/inline-scripts';
+
+
 import * as pages from './pages';
 import DefaultPage from './pages';
 
@@ -20,7 +27,8 @@ class Application extends PureComponent {
     const page = this.getPage();
 
     return (
-      <div>
+      <div className="application">
+        <script dangerouslySetInnerHTML={{ __html: inlineScripts }} />
         {page}
       </div>
     );
