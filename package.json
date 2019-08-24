@@ -1,6 +1,6 @@
 {
   "name": "react-redux-template",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "React redux feature-based template with scalable structure. Includes Webpack, Babel, SCSS support and Dev/Prod build tasks, ESLint",
   "main": "index.js",
   "scripts": {
@@ -127,7 +127,9 @@
     "yargs": "^13.2.2"
   },
   "jest": {
-    "setupFilesAfterEnv": ["jest-enzyme"],
+    "setupFilesAfterEnv": [
+      "jest-enzyme"
+    ],
     "testEnvironment": "enzyme",
     "testEnvironmentOptions": {
       "enzymeAdapter": "react16"
