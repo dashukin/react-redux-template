@@ -1,1 +1,1 @@
-export { default } from './not-found.container';
+export { default } from './not-found.loader';

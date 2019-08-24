@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`application.component application.component snapshots should match snapshot with Home page 1`] = `
+<div
+  className="application"
+>
+  <UniversalComponent />
+</div>
+`;
+
+exports[`application.component application.component snapshots should match snapshot with Home page as default one 1`] = `
+<div
+  className="application"
+>
+  <UniversalComponent />
+</div>
+`;
+
+exports[`application.component application.component snapshots should match snapshot with Not Found page 1`] = `
+<div
+  className="application"
+>
+  <UniversalComponent />
+</div>
+`;

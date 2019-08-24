@@ -77,7 +77,9 @@ module.exports = {
   // ],
 
   // A map from regular expressions to module names that allow to stub out resources with a single module
-  // moduleNameMapper: {},
+  moduleNameMapper: {
+    '^.+\\.s?css$': 'identity-obj-proxy',
+  },
 
   modulePaths: [
     '<rootDir>',
@@ -129,16 +131,18 @@ module.exports = {
   ],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  // setupFilesAfterEnv: [],
+  setupFilesAfterEnv: ['jest-enzyme'],
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: 'node',
+  testEnvironment: 'enzyme',
 
   // Options that will be passed to the testEnvironment
-  // testEnvironmentOptions: {},
+  testEnvironmentOptions: {
+    enzymeAdapter: 'react16'
+  },
 
   // Adds a location field to test results
   // testLocationInResults: false,
