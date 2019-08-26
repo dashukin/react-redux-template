@@ -1,6 +1,6 @@
 const BABELRC_ROOTS = [
-  '.',
   'src/*',
+  'scripts/*',
 ];
 
 module.exports = {
@@ -20,6 +20,7 @@ module.exports = {
     ],
   ],
   plugins: [
+    '@babel/plugin-transform-runtime',
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-proposal-object-rest-spread',
@@ -30,13 +31,13 @@ module.exports = {
   env: {
     production: {
       plugins: [
-        '@babel/runtime',
+
       ],
       babelrcRoots: BABELRC_ROOTS,
     },
     development: {
       plugins: [
-        '@babel/plugin-transform-runtime',
+
       ],
       babelrcRoots: BABELRC_ROOTS,
     },
