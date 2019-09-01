@@ -14,6 +14,7 @@
     "start": "npm run build:all",
     "server:dev": "nodemon dist/server",
     "test": "cross-env NODE_ENV=test jest --config config/jest/jest.config.js",
+    "test:ci": "npm test -- --coverage && codecov",
     "test:watch": "cross-env NODE_ENV=test jest --watch --config config/jest/jest.config.js",
     "lint": "npx eslint ./src",
     "lint:fix": "npx eslint ./src --fix"
@@ -37,6 +38,7 @@
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.9.0",
     "babel-plugin-dynamic-import-node": "^2.3.0",
+    "codecov": "^3.5.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^4.19.1",
