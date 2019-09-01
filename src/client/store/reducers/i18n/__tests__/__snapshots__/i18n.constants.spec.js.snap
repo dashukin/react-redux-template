@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`i18n constants should match snapshot 1`] = `
+Object {
+  "I18N_INIT": "I18N_INIT",
+  "I18N_INIT_ERROR": "I18N_INIT_ERROR",
+  "I18N_INIT_SUCCESS": "I18N_INIT_SUCCESS",
+  "I18N_LANGUAGE_CHANGE": "I18N_LANGUAGE_CHANGE",
+}
+`;

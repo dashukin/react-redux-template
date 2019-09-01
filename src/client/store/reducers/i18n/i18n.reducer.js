@@ -5,7 +5,7 @@ const {
   I18N_INIT_SUCCESS,
 } = i18nConstants;
 
-const initialState = {
+export const initialState = {
   code: undefined,
 };
 

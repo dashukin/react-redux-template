@@ -5,7 +5,10 @@ import {
   put,
 } from 'redux-saga/effects';
 
-import { i18nInitSuccess } from './i18n.actions';
+import {
+  i18nInitSuccess,
+  i18nInitError,
+} from './i18n.actions';
 import i18nConstants from './i18n.constants';
 
 const { I18N_LANGUAGE_CHANGE } = i18nConstants;
@@ -27,9 +30,10 @@ export function* initI18n() {
     yield put(i18nInitSuccess({
       code: i18nCode,
     }));
-  } catch (e) {
+  } catch (err) {
     // eslint-disable-next-line no-console
-    console.error(e.message);
+    console.error(err.message);
+    yield put(i18nInitError(err.message));
   }
 }
 
