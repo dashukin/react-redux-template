@@ -3,6 +3,7 @@ Ready to go react redux template with some predefined features you might need
 
 [![Build Status](https://travis-ci.org/dashukin/react-redux-template.svg?branch=master)](https://travis-ci.org/dashukin/react-redux-template)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
+[![Coverage](https://codecov.io/gh/dashukin/react-redux-template/branch/master/graph/badge.svg)](https://codecov.io/gh/dashukin/react-redux-template)
 
 
 ## Includes
