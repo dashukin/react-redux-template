@@ -14,7 +14,8 @@
     "start": "npm run build:all",
     "server:dev": "nodemon dist/server",
     "test": "cross-env NODE_ENV=test jest --config config/jest/jest.config.js",
-    "test:ci": "npm test -- --coverage && codecov",
+    "test:coverage": "npm test -- --coverage",
+    "test:ci": "npm run test:coverage && codecov",
     "test:watch": "cross-env NODE_ENV=test jest --watch --config config/jest/jest.config.js",
     "lint": "npx eslint ./src",
     "lint:fix": "npx eslint ./src --fix"
