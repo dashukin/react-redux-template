@@ -16,6 +16,7 @@ module.exports = {
     jest: 'readonly',
     describe: 'readonly',
     beforeEach: 'readonly',
+    afterEach: 'readonly',
     it: 'readonly',
     expect: 'readonly',
     process: 'readonly',
