@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`store.reducer reducers should match snapshot 1`] = `
+Object {
+  "example": [Function],
+  "page": [Function],
+}
+`;
