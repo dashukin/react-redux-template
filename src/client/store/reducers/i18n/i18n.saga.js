@@ -14,13 +14,13 @@ export function* initI18n() {
   try {
     const services = yield getContext('services');
     const { i18nApi, i18nService, cookieService } = services;
-    const languageCode = cookieService.get('language');
-    const i18nCode = i18nService.validateLanguageCode(languageCode);
+    const languageCode = yield call(cookieService.get, 'language');
+    const i18nCode = yield call(i18nService.validateLanguageCode, languageCode);
 
-    cookieService.set('language', i18nCode);
+    yield call(cookieService.set, 'language', i18nCode);
 
     const dictionary = yield call(i18nApi.fetchLocale, i18nCode);
-    yield i18nService.init({
+    yield call(i18nService.init, {
       languageCode: i18nCode,
       dictionary,
     });
@@ -29,7 +29,7 @@ export function* initI18n() {
     }));
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.error(e);
+    console.error(e.message);
   }
 }
 
@@ -39,8 +39,8 @@ export function* changeLanguage(action) {
   if (!SSR) {
     const services = yield getContext('services');
     const { i18nService, cookieService } = services;
-    const i18nCode = i18nService.validateLanguageCode(languageCode);
-    cookieService.set('language', i18nCode);
+    const i18nCode = yield call(i18nService.validateLanguageCode, languageCode);
+    yield call(cookieService.set, 'language', i18nCode);
     window.location.reload(true);
   }
 }
