@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home page should render Home page 1`] = `
+<div>
+  app.homepage.title
+  <p>
+    Home page content
+  </p>
+</div>
+`;
