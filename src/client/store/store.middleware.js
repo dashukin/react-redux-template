@@ -1,7 +1,7 @@
 import { applyMiddleware } from 'redux';
 import {
   loggerMiddleware,
-} from './_middleware';
+} from './middleware';
 
 export const createStoreMiddlewareEnhancer = (...extraMiddleware) => (
   applyMiddleware(

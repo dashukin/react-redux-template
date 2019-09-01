@@ -4,7 +4,7 @@ import map from 'lodash/map';
 import {
   initI18n,
   watchI18n,
-} from 'src/client/store/i18n/i18n.saga';
+} from 'src/client/store/reducers/i18n/i18n.saga';
 
 import { watchExample } from 'src/client/store/__example/example.saga';
 

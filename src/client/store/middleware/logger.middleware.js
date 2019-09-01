@@ -1,5 +1,5 @@
 /*
-* Logger _middleware
+* Logger middleware
 * */
 
 import { LOG_ACTIONS_ENABLED } from 'config/application';

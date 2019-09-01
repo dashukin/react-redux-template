@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import { routesMap } from '../routes';
 import { createCombinedReducers } from './store.reducer';
 import { createStoreMiddlewareEnhancer } from './store.middleware';
-import { getSagaMiddleware } from './_middleware/saga.middleware';
+import { getSagaMiddleware } from './middleware/saga.middleware';
 import { rootSaga, watchSaga } from './store.saga';
 
 const reduxDevtoolsCompose = get(window, '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__');

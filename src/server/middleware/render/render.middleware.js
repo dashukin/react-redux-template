@@ -203,11 +203,8 @@ const renderMiddleware = options => async (req, res, next) => {
   const {
     createApp,
     createAppStore,
-    logger,
     webpackStatsSrc,
   } = options;
-
-  logger.info('options', options);
 
   /**
    * @see services.middleware for services initialization -
@@ -218,8 +215,6 @@ const renderMiddleware = options => async (req, res, next) => {
     services,
     isSSR: true,
   });
-
-  logger.info('store', store.getState());
 
   const app = createApp({
     store,
@@ -244,8 +239,6 @@ const renderMiddleware = options => async (req, res, next) => {
   const webpackStats = await getWebpackStats({
     src: webpackStatsSrc,
   });
-
-  logger.info('renderedChunkNames', renderedChunkNames);
 
   const { scripts, styles } = extractChunks({
     chunkNames: renderedChunkNames,
