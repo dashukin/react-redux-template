@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pages.reducer page default state should match snapshot 1`] = `"HOME"`;
+
+exports[`pages.reducer pages default state should match snapshot 1`] = `"HOME"`;

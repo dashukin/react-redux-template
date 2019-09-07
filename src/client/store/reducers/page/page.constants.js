@@ -4,9 +4,9 @@
 
 import { NOT_FOUND } from 'redux-first-router';
 
-const pagesConstants = {
+const pageConstants = {
   HOME: 'HomePage',
   [NOT_FOUND]: 'NotFoundPage',
 };
 
-export default pagesConstants;
+export default pageConstants;

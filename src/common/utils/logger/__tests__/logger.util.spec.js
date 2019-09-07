@@ -51,15 +51,27 @@ describe('logger.util', () => {
 
   describe('transformToPinoProps', () => {
     it('should transform logger options to pino properties', () => {
+      const mockLoggerName = 'logger name';
       const loggerOptions = {
         pretty: true,
+        name: mockLoggerName,
       };
       const expectedTransformedOptions = {
         prettyPrint: true,
+        name: mockLoggerName,
       };
 
       const transformedOptions = Logger.transformToPinoProps(loggerOptions);
 
+      expect(transformedOptions).toEqual(expectedTransformedOptions);
+    });
+
+    it('should return default pino options', () => {
+      const transformedOptions = Logger.transformToPinoProps();
+      const expectedTransformedOptions = {
+        name: undefined,
+        prettyPrint: true,
+      };
       expect(transformedOptions).toEqual(expectedTransformedOptions);
     });
   });
