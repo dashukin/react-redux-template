@@ -31,8 +31,8 @@ class Logger {
 
   /**
    *
-   * @param {Object} options
-   * @param {Boolean} options.pretty - default true
+   * @param {Object} [options]
+   * @param {Boolean} [options.pretty] - default true
    *
    * @return {PinoOptions} - pino options
    */
