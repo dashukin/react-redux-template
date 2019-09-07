@@ -3,7 +3,7 @@ import I18nService from 'src/common/services/i18n';
 import I18nApi from 'src/common/services/api/i18n';
 import CookieService from 'src/common/services/cookie';
 import LocationService from 'src/common/services/location';
-import ExampleApi from './api/__example-api';
+import ExampleApi from './api/__example';
 
 
 export const createServices = (options = {}) => {
