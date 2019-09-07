@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`page.constants should match snapshot 1`] = `
+Object {
+  "@@redux-first-router/NOT_FOUND": "NotFoundPage",
+  "HOME": "HomePage",
+}
+`;
