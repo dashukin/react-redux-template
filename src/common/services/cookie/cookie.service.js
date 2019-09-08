@@ -48,7 +48,7 @@ class CookieService {
    * @param {String|Object} value
    * @param {Object} [options]
    */
-  set(name, value) {
+  set = (name, value) => {
     this.universalCookie.set(name, value, {
       path: '/',
       expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
@@ -60,14 +60,16 @@ class CookieService {
    * Get cookie value
    * @param {String} name
    */
-  get(name) {
+  get = (name) => {
     const cookieValue = this.universalCookie.get(name);
 
     return cookieValue;
   }
 
-  getAll() {
-    return this.universalCookie.getAll();
+  getAll = () => {
+    const output = this.universalCookie.getAll();
+
+    return output;
   }
 }
 
