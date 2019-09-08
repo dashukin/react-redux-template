@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`db.reducer initial state should return default state 1`] = `Object {}`;
