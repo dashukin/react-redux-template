@@ -26,7 +26,7 @@ export const createAppStore = async (options = {}) => {
       services,
       initialState,
     } = options;
-    const devToolsAvailable = isSSR && (typeof reduxDevtoolsCompose === 'function');
+    const devToolsAvailable = !isSSR && (typeof reduxDevtoolsCompose === 'function');
     const composer = devToolsAvailable ? reduxDevtoolsCompose : compose;
 
     const sagaMiddleware = getSagaMiddleware({ services });
