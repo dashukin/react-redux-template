@@ -2,6 +2,7 @@ import axios from 'axios';
 import merge from 'lodash/merge';
 import pickBy from 'lodash/pickBy';
 import isNil from 'lodash/isNil';
+import forEach from 'lodash/fp/forEach';
 
 const GET = 'get';
 const POST = 'post';
@@ -14,13 +15,34 @@ const defaultConfig = {
 
 // eslint-disable-next-line no-unused-vars
 class Api {
-  constructor() {
+  /**
+   *
+   * @param options
+   * @param {Array} [options.requestInterceptors]
+   * @param {Array} [options.responseInterceptors]
+   */
+  constructor(options = {}) {
     const config = merge(defaultConfig, {
       transformRequest: [this._transformRequest],
       transformResponse: [this._transformResponse],
     });
+
     this.instance = axios.create(config);
+
+    const requestInterceptors = options.requestInterceptors || [];
+    const responseInterceptors = options.responseInterceptors || [];
+
+    this._applyRequestInterceptors(requestInterceptors);
+    this._applyResponseInterceptors(responseInterceptors);
   }
+
+  _applyRequestInterceptors = forEach(
+    interceptor => this._instance.interceptors.request.use(interceptor),
+  );
+
+  _applyResponseInterceptors = forEach(
+    interceptor => this._instance.interceptors.response.use(interceptor),
+  );
 
   _transformRequest(data) {
     return data;
