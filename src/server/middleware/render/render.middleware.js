@@ -210,9 +210,14 @@ const renderMiddleware = options => async (req, res, next) => {
    * @see services.middleware for services initialization -
    * unique set of services required by application
    */
-  const { services } = res.locals;
+  const {
+    services,
+    history,
+  } = res.locals;
+
   const store = await createAppStore({
     services,
+    history,
     isSSR: true,
   });
 
