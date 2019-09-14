@@ -1,4 +1,4 @@
-import { fork } from 'redux-saga/effects';
+import { fork, spawn } from 'redux-saga/effects';
 import map from 'lodash/map';
 
 import {
@@ -20,8 +20,12 @@ jest.mock('redux-saga/effects');
 describe('store.saga', () => {
   describe('rootSaga', () => {
     it('should execute start sagas with fork effect', () => {
-      rootSaga().next();
+      const gen = rootSaga();
+      gen.next();
 
+      expect(spawn).toHaveBeenCalledWith(watchSaga);
+
+      gen.next();
       map(startSagas, (saga) => {
         expect(fork).toHaveBeenCalledWith(saga);
       });
@@ -33,7 +37,7 @@ describe('store.saga', () => {
       watchSaga().next();
 
       map(watchSagas, (saga) => {
-        expect(fork).toHaveBeenCalledWith(saga);
+        expect(spawn).toHaveBeenCalledWith(saga);
       });
     });
   });

@@ -4,7 +4,7 @@
 
 import { normalizeExampleData } from 'src/common/services/normalize';
 import {
-  takeLatest, all, call, put, fork, getContext,
+  takeLatest, all, call, put, spawn, getContext,
 } from 'redux-saga/effects';
 import map from 'lodash/fp/map';
 import exampleConstants from './example.constants';
@@ -20,8 +20,9 @@ const {
 export function* fetchExampleData() {
   try {
     const services = yield getContext('services');
-    const { exampleApiService } = services;
-    const response = yield call(exampleApiService.fetchExampleData);
+    const { exampleApi } = services;
+
+    const response = yield call(exampleApi.fetchExampleData);
     const normalizedData = normalizeExampleData(response.data);
 
     yield put(fetchExampleSuccess(normalizedData));
@@ -40,5 +41,5 @@ export const watchers = [
 ];
 
 export function* watchExample() {
-  yield all(map(fork, watchers));
+  yield all(map(spawn, watchers));
 }

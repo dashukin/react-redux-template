@@ -38,6 +38,7 @@ export const startApplication = async () => {
     history,
     initialState: preloadedState,
   });
+
   const app = createApp({ store: appStore, services });
 
   hydrate(app, document.getElementById(ROOT_ELEMENT_ID));
