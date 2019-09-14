@@ -1,6 +1,6 @@
 {
   "name": "react-redux-template",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "React redux feature-based template with scalable structure. Includes Webpack, Babel, SCSS support and Dev/Prod build tasks, ESLint",
   "main": "index.js",
   "scripts": {
