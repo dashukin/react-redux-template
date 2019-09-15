@@ -11,6 +11,8 @@ import {
 import { createApp } from 'src/client';
 import { createAppStore } from 'src/client/store/store';
 
+import apiRouter from './api';
+
 import {
   cookieMiddleware,
   servicesMiddleware,
@@ -38,6 +40,8 @@ export const startServer = () => {
     cookieMiddleware(),
     servicesMiddleware(),
   ]);
+
+  server.use('/api', apiRouter);
 
   server.get(/.*/, renderMiddleware({
     createApp,
