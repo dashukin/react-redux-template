@@ -23,6 +23,7 @@ class Logger {
   /**
    * @param {Object} props
    * @param {Object} options
+   * @param {String} options.name
    */
   constructor(options = {}) {
     const pinoProps = Logger.transformToPinoProps(options);
@@ -32,6 +33,7 @@ class Logger {
   /**
    *
    * @param {Object} [options]
+   * @param {String} [options.name] - logger name
    * @param {Boolean} [options.pretty] - default true
    *
    * @return {PinoOptions} - pino options
