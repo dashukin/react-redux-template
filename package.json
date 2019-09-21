@@ -13,6 +13,7 @@
     "build:inlinescripts": "node ./scripts/inline-scripts/index.js",
     "start": "npm run build:all",
     "server:dev": "nodemon dist/server",
+    "server:debug": "nodemon -- --inspect dist/server",
     "test": "cross-env NODE_ENV=test jest --config config/jest/jest.config.js",
     "test:coverage": "npm test -- --coverage",
     "test:ci": "npm run test:coverage && codecov",
