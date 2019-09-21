@@ -4,7 +4,7 @@
   "description": "React redux feature-based template with scalable structure. Includes Webpack, Babel, SCSS support and Dev/Prod build tasks, ESLint",
   "main": "index.js",
   "scripts": {
-    "build:app": "webpack --config config/webpack/webpack.config.babel.js",
+    "build:app": "webpack --config config/webpack/webpack.config.client.babel.js",
     "build:server": "webpack --config config/webpack/webpack.config.server.babel.js",
     "build:all": "webpack --config config/webpack/webpack.config.all.babel.js",
     "build": "cross-env NODE_ENV=production npm run build:all",
