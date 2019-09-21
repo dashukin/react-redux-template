@@ -27,7 +27,7 @@ class Api {
       transformResponse: [this._transformResponse],
     });
 
-    this.instance = axios.create(config);
+    this._instance = axios.create(config);
 
     const requestInterceptors = options.requestInterceptors || [];
     const responseInterceptors = options.responseInterceptors || [];
@@ -62,7 +62,7 @@ class Api {
     };
     const meaningfulRequestConfig = pickBy(requestConfig, data => !isNil(data));
 
-    return this.instance.request(meaningfulRequestConfig);
+    return this._instance.request(meaningfulRequestConfig);
   }
 
   get(url, params, headers) {
