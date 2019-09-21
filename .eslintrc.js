@@ -43,6 +43,8 @@ module.exports = {
     'react/jsx-filename-extension': 'off',
     'react/prefer-stateless-function': 'off',
     'no-use-before-define': 'off',
+    'jsx-uses-vars': 'on',
+    'jsx-uses-react': 'on'
   },
   settings: {
     'import/resolver': {
