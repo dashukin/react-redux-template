@@ -87,9 +87,10 @@ const createScriptTag = options => createTag({
 
 const createStyleTag = options => createTag({
   ...options,
-  name: 'style',
+  name: 'link',
   attributes: {
     ...options.attributes,
+    rel: 'stylesheet',
     type: 'text/css',
   },
 });
