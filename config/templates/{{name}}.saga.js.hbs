@@ -1,0 +1,9 @@
+import constants from './{{name}}.constants';
+{{#each sagas}}
+
+export function* {{camelCase name}}() {}
+{{#if hasWatcher}}
+
+export function* watch{{pascalCase name}}() {}
+{{/if}}
+{{/each}}

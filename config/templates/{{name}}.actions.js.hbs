@@ -1,0 +1,25 @@
+/**
+* {{properCase name}} actions
+*/
+{{#if actions.length}}
+import constants from './{{name}}.constants';
+
+const {
+{{#each constants}}
+    {{constantCase name}},
+{{/each}}
+} = constants;
+
+{{#each actions}}
+{{#if hasPayload}}
+export const {{camelCase name}} = payload => ({
+    type: {{constantCase type}},
+    payload
+});
+{{else}}
+export const {{camelCase name}} = () => ({
+    type: {{constantCase type}},
+});
+{{/if}}
+{{/each}}
+{{/if}}
