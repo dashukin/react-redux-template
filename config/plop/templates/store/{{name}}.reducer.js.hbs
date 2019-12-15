@@ -1,0 +1,27 @@
+import constants from './{{name}}.constants';
+
+const {
+{{#each constants}}
+  {{constantCase name}},
+{{/each}}
+} = constants;
+
+const initialState = Object.freeze({});
+
+const {{camelCase name}} = (state = initialState, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    {{#each constants}}
+    case {{constantCase name}}: {
+      return state;
+    }
+
+    {{/each}}
+    default: {
+      return state;
+    }
+  }
+};
+
+export default {{camelCase name}};

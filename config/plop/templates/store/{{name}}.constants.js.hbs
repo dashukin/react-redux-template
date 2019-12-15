@@ -1,0 +1,9 @@
+import keymirror from 'keymirror';
+
+const constants = keymirror({
+{{#each constants}}
+  {{constantCase name}}: null,
+{{/each}}
+});
+
+export default constants;

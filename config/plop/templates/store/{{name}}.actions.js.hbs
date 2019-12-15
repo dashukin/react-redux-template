@@ -1,0 +1,16 @@
+{{#if constants.length}}
+import constants from './{{name}}.constants';
+
+const {
+{{#each constants}}
+  {{constantCase name}},
+{{/each}}
+} = constants;
+{{#each constants}}
+
+export const {{camelCase name}} = payload => ({
+  type: {{constantCase name}},
+  payload,
+});
+{{/each}}
+{{/if}}
