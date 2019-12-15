@@ -1,1 +1,1 @@
-export { default } from './render.middleware';
+export { default } from './app-render.middleware';
