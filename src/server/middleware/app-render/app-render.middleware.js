@@ -180,6 +180,7 @@ const stringifyState = (state) => {
  * @param {Object} options
  * @param {Function} createApp - basic function to create application
  * @param {Function} createStore - basic function for store creation
+ * @param {Function} createAppHistory - basic function for app history creation
  * @param {JSON} webpackStats - webpack stats
  * @param {LoggerInstance} logger
  * @return {Function}
@@ -189,6 +190,7 @@ const createRenderMiddleware = options => async (req, res, next) => {
   const {
     createApp,
     createAppStore,
+    createAppHistory,
     webpackStats,
   } = options;
 
@@ -198,8 +200,11 @@ const createRenderMiddleware = options => async (req, res, next) => {
    */
   const {
     services,
-    history,
   } = res.locals;
+
+  const history = createAppHistory({
+    path: req.path,
+  });
 
   const store = await createAppStore({
     services,

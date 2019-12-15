@@ -1,5 +1,4 @@
 import { createServices } from 'src/common/services';
-import { createServerHistory } from 'src/common/history';
 import { createServerSideLocation } from './helpers/services.helper';
 
 const servicesMiddleware = () => (req, res, next) => {
@@ -11,9 +10,6 @@ const servicesMiddleware = () => (req, res, next) => {
   });
 
   res.locals.services = services;
-  res.locals.history = createServerHistory({
-    path: req.path,
-  });
 
   next();
 };

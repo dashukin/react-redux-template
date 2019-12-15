@@ -11,6 +11,7 @@ import {
 
 import { createApp } from 'src/client';
 import { createAppStore } from 'src/client/store/store';
+import { createServerHistory } from 'src/common/history';
 
 import apiRouter from './api';
 
@@ -47,6 +48,7 @@ export const startServer = () => {
   server.get(/.*/, createRenderMiddleware({
     createApp,
     createAppStore,
+    createAppHistory: createServerHistory,
     logger,
     webpackStats: JSON.parse(fse.readFileSync(DIST_WEBPACK_STATS_FILE_SRC)),
   }));
