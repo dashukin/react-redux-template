@@ -1,6 +1,7 @@
 import express, { Router } from 'express';
 import helmet from 'helmet';
 import serveStatic from 'serve-static';
+import fse from 'fs-extra';
 import Logger from 'src/common/utils/logger';
 import {
   DIST_CLIENT_STATIC_DIR,
@@ -16,7 +17,7 @@ import apiRouter from './api';
 import {
   cookieMiddleware,
   servicesMiddleware,
-  renderMiddleware,
+  createRenderMiddleware,
   errorMiddleware,
 } from './middleware';
 
@@ -43,11 +44,11 @@ export const startServer = () => {
 
   server.use('/api', apiRouter);
 
-  server.get(/.*/, renderMiddleware({
+  server.get(/.*/, createRenderMiddleware({
     createApp,
     createAppStore,
     logger,
-    webpackStatsSrc: DIST_WEBPACK_STATS_FILE_SRC,
+    webpackStats: JSON.parse(fse.readFileSync(DIST_WEBPACK_STATS_FILE_SRC)),
   }));
 
   server.use(errorMiddleware({

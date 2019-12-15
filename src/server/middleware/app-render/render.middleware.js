@@ -25,21 +25,6 @@ const getTemplate = async () => {
 
 
 /**
- *
- * @param {Object} options
- * @param {String} options.src
- * @return {Promise<*>}
- */
-const getWebpackStats = async (options) => {
-  const { src } = options;
-  const statsContent = await fse.readFile(src, 'utf-8');
-  const stats = JSON.parse(statsContent);
-
-  return stats;
-};
-
-
-/**
  * @param {Object} options
  * @param {String} name
  * @param {Object} attributes
@@ -195,16 +180,16 @@ const stringifyState = (state) => {
  * @param {Object} options
  * @param {Function} createApp - basic function to create application
  * @param {Function} createStore - basic function for store creation
- * @param {String} webpackStatsSrc - path to webpack stats
+ * @param {JSON} webpackStats - webpack stats
  * @param {LoggerInstance} logger
  * @return {Function}
  */
-const renderMiddleware = options => async (req, res, next) => {
+const createRenderMiddleware = options => async (req, res, next) => {
   // eslint-disable-next-line no-unused-vars
   const {
     createApp,
     createAppStore,
-    webpackStatsSrc,
+    webpackStats,
   } = options;
 
   /**
@@ -242,10 +227,6 @@ const renderMiddleware = options => async (req, res, next) => {
 
   const stringifiedApp = ReactDOMServer.renderToString(wrappedApp);
 
-  const webpackStats = await getWebpackStats({
-    src: webpackStatsSrc,
-  });
-
   const { scripts, styles } = extractChunks({
     chunkNames: renderedChunkNames,
     webpackStats,
@@ -271,4 +252,4 @@ const renderMiddleware = options => async (req, res, next) => {
   res.send(responseBody);
 };
 
-export default renderMiddleware;
+export default createRenderMiddleware;
