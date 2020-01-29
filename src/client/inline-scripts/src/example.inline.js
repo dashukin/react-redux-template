@@ -16,4 +16,4 @@
   if (w.console && typeof w.console.warn === 'function') {
     console.warn('This is injected script');
   }
-}(window));
+}(window || {}));
