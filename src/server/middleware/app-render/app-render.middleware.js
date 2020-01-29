@@ -152,18 +152,18 @@ const extractChunks = (options) => {
  */
 const processTemplate = (options) => {
   const {
-    tpl,
-    app,
-    state,
-    scripts,
-    styles,
+    tpl = '',
+    app = '',
+    state = '',
+    scripts = '',
+    styles = '',
   } = options;
 
   const processedTemplate = tpl
-    .replace(/<!--TEMPLATE_APP-->/, app)
-    .replace(/<!--TEMPLATE_APP_STATE-->/, state)
-    .replace(/<!--TEMPLATE_APP_SCRIPTS-->/, scripts)
-    .replace(/<!--TEMPLATE_APP_STYLES-->/, styles);
+    .replace(/<!--TEMPLATE_APP-->/, () => app)
+    .replace(/<!--TEMPLATE_APP_STATE-->/, () => state)
+    .replace(/<!--TEMPLATE_APP_SCRIPTS-->/, () => scripts)
+    .replace(/<!--TEMPLATE_APP_STYLES-->/, () => styles);
 
   return processedTemplate;
 };
