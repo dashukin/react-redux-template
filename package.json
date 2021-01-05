@@ -73,7 +73,7 @@
     "@babel/register": "^7.0.0",
     "@babel/runtime": "^7.5.5",
     "autoprefixer": "^9.4.10",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "babel-loader": "^8.0.5",
     "babel-plugin-universal-import": "^4.0.0",
     "chainalize": "^1.0.1",
